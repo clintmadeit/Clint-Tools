@@ -1,0 +1,9 @@
+jinja2
+mido
+mutagen
+#numpy
+psutil
+pymarshal
+#PyQt6
+PyYAML
+wavefile

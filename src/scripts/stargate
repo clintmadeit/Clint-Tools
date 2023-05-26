@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+
+import argparse
+import locale
+import os
+import signal
+import subprocess
+import sys
+import time
+
+locale.setlocale(locale.LC_ALL, 'C')
+
+VERSION = "stargate"
+REAL_PATH = __file__
+
+def find_real_path():
+    """ Find the real path to the script, reading symlinks until it is found
+    """
+    global REAL_PATH
+    for i in range(20):
+        if os.path.islink(REAL_PATH):
+            old = REAL_PATH
+            REAL_PATH = os.readlink(REAL_PATH)
+            if not os.path.isabs(REAL_PATH):
+                REAL_PATH = os.path.abspath(
+                    os.path.join(
+                        os.path.dirname(old), 
+                        REAL_PATH,
+                    ),
+                )
+            print(f"Replaced symlink: {old} with {REAL_PATH}")
+        else:
+            break
+
+    assert not os.path.islink(REAL_PATH), REAL_PATH
+
+find_real_path()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Launch Stargate DAW",
+    )
+    help_msg = 'The project file to open'
+    parser.add_argument(
+        'project_file',
+        default=None,
+        help=help_msg,
+        nargs='?',
+    )
+    parser.add_argument(
+        '--create',
+        action='store_true',
+        default=False,
+        dest='create',
+        help='Create the project if it does not exist',
+    )
+    args = parser.parse_args()
+    if args.project_file is not None:
+        if args.project_file == 'appimage-start-menu':
+            parser.error(
+                'appimage-start-menu is deprecated, this functionality has '
+                'been replaced by an action in the main menu.  See: '
+                'https://github.com/stargatedaw/stargate/blob/main/docs/'
+                'troubleshooting/appimage.md#adding-the-appimage-to-'
+                'the-start-menu'
+            )
+        assert os.path.basename(args.project_file) == f'{VERSION}.project', (
+            f"File must be in the format '/path/to/{VERSION}.project', "
+            f"got '{args.project_file}'"
+        )
+        assert args.create or os.path.isfile(args.project_file), \
+            f"{args.project_file} does not exist"
+    return args
+
+def start_paulstretch():
+    from sglib.lib.paulstretch import main as ps_main
+    ps_main()
+
+def start_stargate():
+    args = parse_args()
+    from sgui._main import main as sg_main
+    sg_main(args)
+
+def main():
+    is_paulstretch = False
+    if len(sys.argv) >= 2 and sys.argv[1] == 'paulstretch':
+        is_paulstretch = True
+        sys.argv.pop(1)
+
+    f_prefix_dir = os.path.dirname(REAL_PATH)
+    f_path = os.path.join(
+        f_prefix_dir,
+        "..",
+    )
+    f_path = os.path.abspath(f_path)
+    sys.path.insert(0, f_path)
+    print(f'sys.path = {sys.path}')
+    try:
+        if is_paulstretch:
+            start_paulstretch()
+        else:
+            start_stargate()
+        return
+    except ImportError:
+        print(
+            "Did not detect local development environment, trying "
+            "system installation",
+        )
+    f_path = os.path.join(
+        f_prefix_dir,
+        "..",
+        "share",
+        VERSION,
+        "stargate",
+    )
+    f_path = os.path.abspath(f_path)
+    sys.path.insert(0, f_path)
+    print(f'sys.path = {sys.path}')
+    if is_paulstretch:
+        start_paulstretch()
+    else:
+        start_stargate()
+
+if __name__ == "__main__":
+    main()

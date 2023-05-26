@@ -1,0 +1,10 @@
+template: default.qss
+palette: default.yaml
+variables:
+  path: default.yaml
+  overrides: {}
+system:
+  path: default.yaml
+  overrides:
+    daw: {}
+    widgets: {}
