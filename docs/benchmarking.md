@@ -28,9 +28,9 @@ the normal, average use case is somewhere between, but much closer to the ideal
 use case.
 
 # Benchmark setup
-## Download or build Stargate DAW
+## Download or build Clint-Tools DAW
 See [the build instructions](./building.md) or the
-[releases page](https://github.com/stargateaudio/stargate/releases).
+[releases page](https://github.com/clintmadeit/Clint-Tools/releases).
 
 ## Run the benchmark
 ### Acquiring projects to benchmark
@@ -38,8 +38,8 @@ See [the build instructions](./building.md) or the
 
 Or clone the demo projects for real world benchmarking
 ```
-git clone https://github.com/stargateaudio/stargate-v1-demo-projects.git
-# Projects are in stargate-v1-demo-projects/src/*/
+git clone https://github.com/clintmadeit/Clint_Toolsv1_demo_projects.git
+# Projects are in Clint_Toolsv1_demo_projects/src/*/
 ```
 
 ### Generate the engine command from the UI
@@ -54,15 +54,15 @@ include empty space at either end, as it may skew the results.
   the region start/end
 * Go to `Menu (top left of the screen)->File->Render`
 * Click the `Copy cmd args` button, and close the dialog
-* Close Stargate DAW
+* Close Clint_Tools DAW
 * Open a terminal
-* Type in the `stargate-engine` binary you want to use, ie: ./stargate-engine,
-  /usr/bin/stargate-engine, etc...
+* Type in the `Clint_Tools-engine` binary you want to use, ie: ./stargate-engine,
+  /usr/bin/Clint_Tools-engine, etc...
 * Paste the command arguments you copied from the render dialog
 
 You should have with something like this in your terminal window:
 ```
-./stargate-engine daw '/home/me/stargate/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
+./Clint_Tools-engine daw '/home/me/Clint_Tools/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
 ```
 
 ### Parameterizing a benchmarking shell command
@@ -86,7 +86,7 @@ BUF_SIZE=512
 THREADS=8
 # The project folder to render.  Specifically, this is the folder that contains
 # the `stargate.project` file.
-PROJECT=~/stargate/projects/myproject
+PROJECT=~/Clint-Tools/projects/myproject
 # The file to output.  If you want to keep all of the artifacts from this run,
 # change the filename between runs
 OUTFILE=test.wav
@@ -99,7 +99,7 @@ START=8
 # This should always be a (much) larger number than ${START}
 END=340
 
-./stargate-engine daw ${PROJECT?} ${OUTFILE?} ${START?} ${END?} ${SR?} ${BUF_SIZE?} ${THREADS?} 0 0 0
+./Clint_Tools-engine daw ${PROJECT?} ${OUTFILE?} ${START?} ${END?} ${SR?} ${BUF_SIZE?} ${THREADS?} 0 0 0
 ```
 
 The `OUTFILE` parameter will exist as a file after the render.  Note that the
@@ -150,7 +150,7 @@ heavy MIDI item.  Nobody would realistically run such a heavy project, as such
 you should not try to open the project and play it back in Stargate DAW unless
 you have a CPU with many cores AND you have configured Stargate DAW to use at
 least 8 cores in the `Hardware Settings` dialog on the welcome screen.
-However, you can offline render it on any hadrware, even a Raspberry Pi 4 or an
+However, you can offline render it on any hardware, even a Raspberry Pi 4 or an
 ancient laptop.
 
 16 threads, 44100 sample rate, 512 buffer size:
