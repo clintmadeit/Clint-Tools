@@ -111,8 +111,8 @@ have some effect on the experience, but the difference should be minimal).
   the same file location.
 - A full suite of built-in plugins.  Any 3rd party plugin standard is going
   to be difficult to support across operating systems and CPU architectures,
-  if the developers even support all of the platforms that Stargate supports.
-  Even if well supported on all platforms, it is cumbersome to have all users
+  if the developers even support all the platforms that Clint-Tools supports.
+  Even if well-supported on all platforms, it is cumbersome to have all users
   install the exact same plugins.
 
 ## 5. Stability
@@ -129,10 +129,10 @@ projects.
 - Engine and plugins written in C.  See the above rationale.
 - UI is a separate process from the engine, they cannot crash each other.
 - Best in class testing and debugging capabilities. See the project
-  documentation on Github for more information.
+  documentation on GitHub for more information.
 - Projects are completely portable between computers.  See the previous
   section about project portability.
-- Minor releases will not break backwards compatility within that major
+- Minor releases will not break backwards compatibility within that major
   release.  If we decide to implement a backwards-incompatible feature, it
   will happen in the next major release.
 - Major releases are supported for as long as possible, until it is simply
