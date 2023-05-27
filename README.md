@@ -7,13 +7,13 @@ and why, read the
 
 # Links
 - [Download Clint-Tools demo projects](
-    https://github.com/clintmadeit/Clint-Tools_v1-demo-projects)
+    https://github.com/clintmadeit/ClintToolsv1_demo_projects)
 - [Download instruments for Sampler1](https://github.com/sfzinstruments)
 - [Download or contribute to our public domain sample pack](
-    https://github.com/clintmadeit/Clint-Tools-sample-pack)
-- Source code is mirrored on [Gitlab](https://gitlab.com/clintmadeitdaw) and
-  [Codeberg](https://codeberg.org/clintmadeitdaw), however, releases, issues and
-  pull requests are only on [Github](https://github.com/clintmadeitdaw)
+    https://github.com/clintmadeit/ClintTools_sample_pack)
+- Source code is mirrored on [Gitlab](https://gitlab.com/Clint-Tools) and
+  [Code-berg](https://codeberg.org/Clint-Tools), however, releases, issues and
+  pull requests are only on [GitHub](https://github.com/Clint-Tools)
 
 # Features
 - A digital audio workstation (DAW) with a powerful pattern-based workflow
@@ -27,12 +27,12 @@ and why, read the
 - Everything you need to create music in a single package, no need to install
   additional software
 - Revolutionary CPU efficiency for DAW and plugins, minimum recommended
-  hardware: Raspberry Pi 4, or a 15 year old laptop with a
-  dual core CPU, 1GB of RAM and a 720p display.
+  hardware: Raspberry Pi 4, or a 15-year-old laptop with a
+  dual-core CPU, 4GB of RAM and a 720p display.
 - Support for display resolution from 720p to 4k and above.
 - Optional portable flash drive install on Windows and
-  [MacOS](docs/troubleshooting/macos_install.md)
-- Broad audio and MIDI hardware support using Portaudio and Portmidi
+  [macOS](docs/troubleshooting/macos_install.md)
+- Broad audio and MIDI hardware support using Portaudio and Port midi
 
 # Screenshots
 ![Sequencer](assets/sequencer.png?raw=true "Sequencer")
@@ -49,14 +49,12 @@ and why, read the
 
 # Licensing
 
-Stargate is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, under version 3 of the License.
+Clint-Tools is a professional music production software: you cannot redistribute it and/or modify
+it whatsoever. You can however suggest improvements to the authorized personnel for implementation.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is an ALX school project and is intended to grow and be commercialized in the near future.
+It is there prohibited from modifying it for own personal use or personalization. One can however request collaboration
+and be part of the final product as a share-holder.
 
 For details on the GNU General Public License, see [the license](LICENSE).
 
