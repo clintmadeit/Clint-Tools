@@ -26,5 +26,5 @@ Agreement to these terms will be considered implicit.
 # Signatures
 Format: `Name (user name and/or real name) <email address>`
 ---
-stargateaudio <stargateaudio@noreply.github.com>
+clintmadeit <clintmadeit@noreply.github.com>
 
