@@ -50,10 +50,12 @@ and why, read the
 # Licensing
 
 Clint-Tools is a professional music production software: you cannot redistribute it and/or modify
-it whatsoever. You can however suggest improvements to the authorized personnel for implementation.
+it whatsoever.
+You can, however, suggest improvements to the authorized personnel for implementation.
 
 This program is an ALX school project and is intended to grow and be commercialized in the near future.
-It is there prohibited from modifying it for own personal use or personalization. One can however request collaboration
+It is there prohibited from modifying it for own personal use or personalization.
+One can, however, request collaboration
 and be part of the final product as a share-holder.
 
 For details on the GNU General Public License, see [the license](LICENSE).
