@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; version 3 of the License.
+This program is a school project that is intended to be
+ commercialized in the near future; you cannot redistribute it and/or modify
+it for whatsoever reason unless with authorized permission.
+However, you can ask for collaboration to be part of the final project.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+With proper licensing, one can own a copy of the program, use it for commercial purposes.
+But modification and reselling the program is prohibited.
 """
 
-# This script generates band-limited wavetables of classic waveforms using
-# numpy, and converts the wavetables to C code
+# This script generates band-limited wave-tables of classic waveforms using
+# numpy, and converts the wave-tables to C code
 
 import numpy
 from matplotlib import pyplot
@@ -78,8 +77,10 @@ __thread float AF_{NAMEU}_DATA[AF_{NAMEU}_DCOUNT] = {{
 #endif /*{NAMEU}_H*/
 """
 
+
 def pitch_to_hz(a_pitch):
-    return (440.0 * pow(2.0, (float(a_pitch) - 57.0) * 0.0833333333333333333))
+    return 440.0 * pow(2.0, (float(a_pitch) - 57.0) * 0.0833333333333333333)
+
 
 def get_harmonic(a_size, a_phase, a_num):
     """ @a_size:  The size of the fundamental frequency
@@ -90,8 +91,10 @@ def get_harmonic(a_size, a_phase, a_num):
         a_phase, (2.0 * numpy.pi * a_num) + a_phase, a_size)
     return numpy.sin(f_lin)
 
+
 def double_to_c_float(a_double):
     return "{}f".format(round(a_double, 7))
+
 
 def dict_to_c_code(a_dict, a_name):
     arr_lines = []
@@ -127,24 +130,28 @@ def dict_to_c_code(a_dict, a_name):
         with open(code_path, 'w') as fh:
             fh.write(code)
 
+
 def visualize(a_dict):
     keys = list(sorted(a_dict))
     pyplot.plot(a_dict[keys[0]])
     pyplot.show()
 
+
 def dict_to_wav(a_dict, a_name):
     keys = list(sorted(a_dict))
     name = "{}.wav".format(a_name)
-    with wavefile.WaveWriter(name, channels=1, samplerate=44100,) as writer:
+    with wavefile.WaveWriter(name, channels=1, samplerate=44100, ) as writer:
         for key in keys[16:70:3]:
             arr = numpy.array([a_dict[key]])
             count = int(SR / arr.shape[1])
             for i in range(count):
                 writer.write(arr)
 
+
 def normalize(arr):
     buffer_max = numpy.amax(numpy.abs(arr))
     arr *= 1. / buffer_max
+
 
 def get_notes():
     for note in range(0, 100):
@@ -154,8 +161,10 @@ def get_notes():
         count = int((NYQUIST - hz) // hz)
         yield note, length, count
 
+
 def get_phase_smear(i):
     return (1. - (1. / float(i))) * numpy.pi * .5933333333333333333
+
 
 def get_sines():
     result = {}
@@ -168,6 +177,7 @@ def get_sines():
         normalize(arr)
     print("sine data size: {} bytes".format(total_length * 4))
     return result
+
 
 def get_saws(a_phase_smear=True, a_ss=False):
     result = {}
@@ -185,6 +195,7 @@ def get_saws(a_phase_smear=True, a_ss=False):
         normalize(arr)
     print("saw data size: {} bytes".format(total_length * 4))
     return result
+
 
 def get_squares(a_phase_smear=True, a_triangle=False):
     result = {}
@@ -208,8 +219,9 @@ def get_squares(a_phase_smear=True, a_triangle=False):
         "triangle" if a_triangle else "square", total_length * 4))
     return result
 
+
 SAWS = get_saws()
-SUPERB_SAWS = get_saws(a_ss=True) #, a_phase_smear=False)
+SUPERB_SAWS = get_saws(a_ss=True)  # , a_phase_smear=False)
 SQUARES = get_squares()
 TRIANGLES = get_squares(a_triangle=True)
 SINES = get_sines()
@@ -218,10 +230,9 @@ RESULT = (
     (SAWS, "saw"), (SUPERB_SAWS, "superb_saw"),
     (SQUARES, "square"), (TRIANGLES, "triangle"),
     (SINES, "sine")
-    )
+)
 
 for wavs, name in RESULT:
     dict_to_c_code(wavs, name)
     dict_to_wav(wavs, name)
     visualize(wavs)
-
