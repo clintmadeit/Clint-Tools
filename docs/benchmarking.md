@@ -48,8 +48,8 @@ know which beat number the render should start and stop at.  Using arbitrary
 numbers is also an option, but it is best to render the entire song and not
 include empty space at either end, as it may skew the results.
 
-* Opening the project in Stargate DAW
-* Make sure that the region start/end are set to the portion of the song
+* Opening the project in Clint Tools DAW
+* Make sure that the region start and end are set to the portion of the song
   you want to render by right-clicking on the sequencer header and setting
   the region start/end
 * Go to `Menu (top left of the screen)->File->Render`
