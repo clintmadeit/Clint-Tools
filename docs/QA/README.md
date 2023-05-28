@@ -1,5 +1,5 @@
 # QA
-This folder contains various QA flows for manually testing Stargate.
+This folder contains various QA flows for manually testing Clint Tools.
 Developers should check and update these flows as they modify or add
 features.
 
