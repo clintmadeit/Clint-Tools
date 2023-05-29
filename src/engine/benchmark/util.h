@@ -1,7 +1,7 @@
 #ifndef TEST_TIME_H
 #define TEST_TIME_H
 
-#include <stddef.h>
+#include <std def.h>
 #include <time.h>
 
 // passed in from Makefile
