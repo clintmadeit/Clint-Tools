@@ -18,32 +18,32 @@ with open("meta.json") as f:
 MAJOR_VERSION = meta['version']['major']
 MINOR_VERSION = meta['version']['minor']
 
-if os.path.isdir('dist/stargate'):
-    shutil.rmtree('dist/stargate')
+if os.path.isdir('dist/clinttools'):
+    shutil.rmtree('dist/clinttools')
 
 print("Running Pyinstaller")
 subprocess.check_call(["pyinstaller", "pyinstaller-windows-onedir.spec"])
 
 TEMPLATE = r"""
-!define PRODUCT_NAME "stargate"
+!define PRODUCT_NAME "clinttools"
 !define PRODUCT_VERSION "{MAJOR_VERSION_NUM}.0"
-!define PRODUCT_PUBLISHER "stargatedaw"
+!define PRODUCT_PUBLISHER "clinttoolsdaw"
 
 ;Require admin rights on NT6+ (When UAC is turned on)
 RequestExecutionLevel admin
 
 SetCompressor /SOLID lzma
 
-Name "Stargate DAW {MINOR_VERSION}"
-OutFile "dist\StargateDAW-{MINOR_VERSION}-win64-installer.exe"
-InstallDir "$PROGRAMFILES64\stargatedaw@github\Stargate"
+Name "Clint Tools DAW {MINOR_VERSION}"
+OutFile "dist\clinttoolsDAW-{MINOR_VERSION}-win64-installer.exe"
+InstallDir "$PROGRAMFILES64\clinttoolsdaw@github\Clint-Tools"
 
 ;--------------------------------
 ;Interface Settings
   !define MUI_ABORTWARNING
   !define MUI_LICENSEPAGE_CHECKBOX
   !define MUI_FINISHPAGE_RUN "$INSTDIR\program\{MAJOR_VERSION}.exe"
-  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Stargate DAW"
+  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Clint Tools DAW"
 
 !include MUI2.nsh
 !include WinVer.nsh
@@ -105,31 +105,31 @@ Section "Base Install" SEC01
 
     ; Clean up the old legacy file structure
     ; TODO: Remove this in mid 2023
-    RMDir /r "$PROGRAMFILES64\stargateaudio@github\Stargate\program"
-    Delete "$PROGRAMFILES64\stargateaudio@github\Stargate\uninstall.exe"
+    RMDir /r "$PROGRAMFILES64\clint-toolsaudio@github\clinttools\program"
+    Delete "$PROGRAMFILES64\clint-toolsaudio@github\clinttools\uninstall.exe"
     ; Only if empty
-    RMDir "$PROGRAMFILES64\stargateaudio@github\Stargate"
-    RMDir "$PROGRAMFILES64\stargateaudio@github"
+    RMDir "$PROGRAMFILES64\clint-toolsaudio@github\clinttools"
+    RMDir "$PROGRAMFILES64\clint-toolsaudio@github"
 
     ; Delete the old program
     RMDir /r $INSTDIR\program
     ; Install the program
     CreateDirectory $INSTDIR\program
     SetOutPath $INSTDIR\program
-    File /r "dist\stargate\"
+    File /r "dist\clinttools\"
     File "files\share\pixmaps\{MAJOR_VERSION}.ico"
     ; Add to the "Add or remove programs" dialog
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\StargateDAW" \
-                "DisplayName" "Stargate DAW"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\StargateDAW" \
-                "DisplayIcon" "$\"$INSTDIR\program\files\share\pixmaps\stargate.ico$\""
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\StargateDAW" \
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
+                "DisplayName" "Clint Tools DAW"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
+                "DisplayIcon" "$\"$INSTDIR\program\files\share\pixmaps\clinttools.ico$\""
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
                 "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
 SectionEnd
 
 Section "Start Menu Shortcut" SEC02
     createShortCut \
-      "$SMPROGRAMS\Stargate DAW.lnk" \
+      "$SMPROGRAMS\Clint Tools DAW.lnk" \
       "$INSTDIR\program\{MAJOR_VERSION}.exe" \
       "" \
       "$INSTDIR\program\{MAJOR_VERSION}.ico"
@@ -138,15 +138,17 @@ SectionEnd
 Section /o "Portable Flash Drive Install" SEC03
     SetOutPath $INSTDIR
     ; Create the shortcut to the executable
-    File windows\LaunchStargate.cmd
+    File windows\Launchclinttools.cmd
     SetOutPath $INSTDIR\program
-    ; The exe looks for this empty file to choose the Stargate home folder
-    FileOpen $9 ..\_stargate_home w
-    FileWrite $9 "This file tells Stargate it is a portable install."
+    ; The exe looks for this empty file to choose the clinttools home folder
+    FileOpen $9 ..\_clinttools_home w
+    FileWrite $9 "This file tells clinttools it is a portable install."
     FileClose $9
 SectionEnd
 
-LangString DESC_SEC03 ${{LANG_ENGLISH}} "Store settings and projects in the same folder as the executable.  Only use this if you are installing to a flash drive, and you must change the install folder to the flash drive in the next step."
+LangString DESC_SEC03 ${{LANG_ENGLISH}} "Store settings and projects in the same folder as the executable.  Only use 
+this if you are installing to a flash drive, and you must change the install folder to the flash drive in the next 
+step."
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 !insertmacro MUI_DESCRIPTION_TEXT ${{SEC03}} $(DESC_SEC03)
@@ -156,21 +158,20 @@ Section "uninstall"
     ; We do not delete settings, projects or any other files the user may have
     ; stored next to the application, only the application itself
     RMDir /r $INSTDIR\program
-    Delete "$SMPROGRAMS\Stargate DAW.lnk"
-    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\StargateDAW"
+    Delete "$SMPROGRAMS\Clint Tools DAW.lnk"
+    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW"
 SectionEnd
 """
 
 NSIS = r"C:\Program Files (x86)\NSIS\Bin\makensis.exe"
 
 template = TEMPLATE.format(
-	MINOR_VERSION=MINOR_VERSION,
-	MAJOR_VERSION=MAJOR_VERSION,
-	MAJOR_VERSION_NUM=MAJOR_VERSION[-1],
+    MINOR_VERSION=MINOR_VERSION,
+    MAJOR_VERSION=MAJOR_VERSION,
+    MAJOR_VERSION_NUM=MAJOR_VERSION[-1],
 )
 template_name = "{0}.nsi".format(MAJOR_VERSION)
 with open(template_name, "w") as f:
-	f.write(template)
+    f.write(template)
 print("Running NSIS")
 subprocess.check_call([NSIS, template_name])
-
