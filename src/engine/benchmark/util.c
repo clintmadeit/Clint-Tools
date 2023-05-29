@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include <std def.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -39,7 +39,7 @@ void TimeSection(
         units_per_iteration *= 1000.;
     }
 
-    fprintf(
+    printf(
         stderr,
 	"%s:\n"
         "  iterations: %lu\n"
