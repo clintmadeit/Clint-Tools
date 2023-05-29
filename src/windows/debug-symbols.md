@@ -1,6 +1,6 @@
 # Debug Symbols
 This document describes how to install Windows .pdb debug symbols for 
-dependencies, to allow using WinDbg and enable better stack traces when a
+dependencies to allow using WinDbg and enable better stack traces when a
 library segfaults.
 
 # Procedure
@@ -26,12 +26,12 @@ missing build dependencies or other tools required to build the package.
 ```
 makepkg-mingw
 pacman -U $PACKAGE_NAME.zst
-cd ~/src/stargate/src
+cd ~/src/clintate/src
 make mingw_deps
 ```
 
 # From the Visual Studio Developer Command Prompt
 ```
-cd c:\msys64\home\starg\src\stargate\src\engine
+cd c:\msys64\home\clint\src\clinttools\src\engine
 .\cv2pdb\cv2pdb.exe .\$PACKAGE_NAME.dll
 ```
