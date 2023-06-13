@@ -11,7 +11,7 @@ and why, read the
 - [Download instruments for Sampler1](https://github.com/sfzinstruments)
 - [Download or contribute to our public domain sample pack](
     https://github.com/clintmadeit/ClintTools_sample_pack)
-- Source code is mirrored on [Gitlab](https://gitlab.com/Clint-Tools) and
+#- Source code is mirrored on [Gitlab](https://gitlab.com/Clint-Tools) and
   [Code-berg](https://codeberg.org/Clint-Tools), however, releases, issues and
   pull requests are only on [GitHub](https://github.com/Clint-Tools)
 
