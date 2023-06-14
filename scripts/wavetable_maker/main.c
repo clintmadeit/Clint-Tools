@@ -1,14 +1,14 @@
 /*
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; version 3 of the License.
+This program is a school project but owned by Johnclinton Luseno. The projects is
+intended to be commercial in future once completed. No rights to modify, distribute or
+even personalize any part of this projects.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program can only be distributed under the permission of the owner and it's intended to better
+the music production experience among African and other music producers and artists.
+Once you have a lisense to use it, you fully own the rights to use it for your creative purposes,
+commercial but you can't resale, modify or use it for ill intentions.
 */
 
 #include <stdio.h>
@@ -57,7 +57,7 @@ void print_to_c_array(float * a_buffer, int a_count, char * a_name)
         f_i++;
     }
 
-    printf("#define %s_count %i\n\nfloat %s_array[%s_count] = {\n", a_name, a_count, a_name, a_name);
+    printf("#define %s_count %i\n\n float %s_array[%s_count] = {\n", a_name, a_count, a_name, a_name);
 
     f_i = 0;
 
