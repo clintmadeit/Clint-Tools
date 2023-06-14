@@ -7,14 +7,14 @@ ARCH = platform.machine()
 block_cipher = None
 
 BINARIES = [
- ('engine/stargate-engine', 'engine'),
+ ('engine/clinttools-engine', 'engine'),
  ('engine/*.dylib', '.'),
  ('engine/rubberband', 'engine'),
- ('engine/stargate-soundstretch', 'engine'),
+ ('engine/clinttools-soundstretch', 'engine'),
  ('engine/sbsms', 'engine'),
 ]
 
-a = Analysis(['scripts/stargate'],
+a = Analysis(['scripts/clinttools'],
              pathex=[
                  os.path.dirname(SPECPATH),
              ],
@@ -73,6 +73,6 @@ coll = COLLECT(exe,
                upx_exclude=[],
                name='stargate')
 app = BUNDLE(coll,
-             name='Stargate DAW.app',
-             icon='macos/stargate.icns',
-             bundle_identifier='io.github.stargateaudio')
+             name='Clint Tools DAW.app',
+             icon='macos/clinttools.icns',
+             bundle_identifier='io.github.clinttoolsaudio')

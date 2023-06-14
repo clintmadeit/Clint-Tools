@@ -1,10 +1,10 @@
-# -*- mode: python ; coding: utf-8 -*-
+S# -*- mode: python ; coding: utf-8 -*-
 import os
 
 block_cipher = None
 
 
-a = Analysis(['scripts\\stargate'],
+a = Analysis(['scripts\\clinttools'],
              pathex=[os.path.abspath(SPECPATH)],
              binaries=[
                  ('engine/*.exe', 'engine'),
@@ -32,8 +32,8 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          icon='files\\share\\pixmaps\stargate.ico',
-          name='stargate',
+          icon='files\\share\\pixmaps\clinttools.ico',
+          name='clinttools',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -51,4 +51,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='stargate')
+               name='clinttools')

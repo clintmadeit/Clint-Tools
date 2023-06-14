@@ -4,8 +4,8 @@
 block_cipher = None
 
 
-a = Analysis(['scripts\\stargate'],
-             pathex=['C:\\msys64\\home\\starg\\src\\stargate\\src'],
+a = Analysis(['scripts\\clinttools'],
+             pathex=['C:\\msys64\\home\\starg\\src\\clinttools\\src'],
              binaries=[
                  ('engine/*.exe', 'engine'),
                  ('engine/*.pdb', 'engine'),
@@ -34,7 +34,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='stargate',
+          name='clinttools',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -45,5 +45,5 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          icon='files\\share\\pixmaps\stargate.ico',
+          icon='files\\share\\pixmaps\clinttools.ico',
           entitlements_file=None )
