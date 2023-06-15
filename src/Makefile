@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PREFIX ?= /usr
-MAJOR := $(shell jq -r .version.major meta.json || echo stargate)
+MAJOR := $(shell jq -r .version.major meta.json || echo clinttools)
 MINOR := $(shell jq -r .version.minor meta.json)
 WMAJOR := $(shell /mingw64/bin/jq -r .version.major meta.json 2>/dev/null)
 WMINOR := $(shell /mingw64/bin/jq -r .version.minor meta.json 2>/dev/null)
@@ -13,7 +13,7 @@ CXX ?= /usr/bin/c++
 PIP ?= pip3
 BROWSER ?= firefox
 DOCKER ?= podman
-DOCKER_IMAGE ?= stargate-appimage-builder
+DOCKER_IMAGE ?= clinttools-appimage-builder
 MINGW_PREFIX ?= /mingw64
 
 # --------------------------------------------------------------
@@ -26,27 +26,27 @@ all: sbsms soundtouch distro
 appimage:
 	appimage/python-appimage/release.py
 	$(DOCKER) run \
-		--mount type=bind,src=..,dst=/stargate \
+		--mount type=bind,src=..,dst=/clinttools \
 		$(DOCKER_IMAGE) \
-		sh -c 'cd /stargate/src && ./appimage/appimage-helper.sh'
+		sh -c 'cd /clinttools/src && ./appimage/appimage-helper.sh'
 	appimagetool -n \
 		../dist/squashfs-root/ \
-		../dist/StargateDAW-$(MINOR)-linux-x86_64.AppImage
+		../dist/clinttoolsDAW-$(MINOR)-linux-x86_64.AppImage
 
 appimage-debug:
 	appimage/python-appimage/release.py
 	$(DOCKER) run -it \
-		--mount type=bind,src=..,dst=/stargate \
+		--mount type=bind,src=..,dst=/clinttools \
 		$(DOCKER_IMAGE) \
 		sh
 
 docker-image:
-	$(DOCKER) build -t stargate-base  -f appimage/Dockerfile-base
+	$(DOCKER) build -t clinttools-base  -f appimage/Dockerfile-base
 	$(DOCKER) build -t $(DOCKER_IMAGE)  -f appimage/Dockerfile-appimage-builder
 
 clean: clean_pyc
 	rm -rf htmlcov/ .pytest_cache/ .eggs/ .coverage \
-		*.pyc *.egg-info build/ dist/ vendor/stargate-soundstretch
+		*.pyc *.egg-info build/ dist/ vendor/clinttools-soundstretch
 	make -C engine clean
 	make -C vendor/sbsms/cli clean
 
@@ -57,7 +57,7 @@ commit_hash:
 	git rev-parse --short HEAD > COMMIT || echo unknown > COMMIT
 
 distro: commit_hash
-	# Build Stargate DAW without vendored dependencies, you are expected
+	# Build clinttools DAW without vendored dependencies, you are expected
 	# to provide and package: mido, pymarshal, SBSMS, python-wavefile
 	make -C engine
 
@@ -66,12 +66,12 @@ install: install_self_contained install_symlinks
 
 install_self_contained:
 	# Linux only, install all files to a single directory,
-	# except for /usr/share desktop files and /usr/bin/stargate,
+	# except for /usr/share desktop files and /usr/bin/clinttools,
 	# which should be symlinked by the package
 	install -d $(SG_DEST)/engine
-	install -m 755 engine/stargate-engine $(SG_DEST)/engine/
+	install -m 755 engine/clinttools-engine $(SG_DEST)/engine/
 	install -m 755 vendor/sbsms/cli/sbsms* $(SG_DEST)/engine/
-	install -m 755 vendor/stargate-soundstretch $(SG_DEST)/engine/
+	install -m 755 vendor/clinttools-soundstretch $(SG_DEST)/engine/
 	cp -r files meta.json scripts sg_py_vendor sglib sgui $(SG_DEST)
 	# install -d "$(DESTDIR)$(PREFIX)/share"
 	# cp -r files/share/* "$(DESTDIR)$(PREFIX)/share/"
@@ -84,27 +84,27 @@ install_symlinks: uninstall_symlinks
 	install -d $(DESTDIR)$(PREFIX)/share/doc
 	install -d $(DESTDIR)$(PREFIX)/share/mime/packages
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-	ln -rs $(DESTDIR)/opt/stargate/scripts/stargate \
-		$(DESTDIR)$(PREFIX)/bin/stargate || true
-	ln -rs $(DESTDIR)/opt/stargate/files/share/doc/stargate \
-		$(DESTDIR)$(PREFIX)/share/doc/stargate || true
-	ln -rs $(DESTDIR)/opt/stargate/files/share/pixmaps/stargate.png \
-		$(DESTDIR)$(PREFIX)/share/pixmaps/stargate.png || true
-	ln -rs $(DESTDIR)/opt/stargate/files/share/pixmaps/stargate.ico \
-		$(DESTDIR)$(PREFIX)/share/pixmaps/stargate.ico || true
-	ln -rs $(DESTDIR)/opt/stargate/files/share/applications/stargate.desktop \
-		$(DESTDIR)$(PREFIX)/share/applications/stargate.desktop || true
-	ln -rs $(DESTDIR)/opt/stargate/files/share/mime/packages/stargate.xml \
-		$(DESTDIR)$(PREFIX)/share/mime/packages/stargate.xml || true
+	ln -rs $(DESTDIR)/opt/clinttools/scripts/clinttools \
+		$(DESTDIR)$(PREFIX)/bin/clinttools || true
+	ln -rs $(DESTDIR)/opt/clinttools/files/share/doc/clinttools \
+		$(DESTDIR)$(PREFIX)/share/doc/clinttools || true
+	ln -rs $(DESTDIR)/opt/clinttools/files/share/pixmaps/clinttools.png \
+		$(DESTDIR)$(PREFIX)/share/pixmaps/clinttools.png || true
+	ln -rs $(DESTDIR)/opt/clinttools/files/share/pixmaps/clinttools.ico \
+		$(DESTDIR)$(PREFIX)/share/pixmaps/clinttools.ico || true
+	ln -rs $(DESTDIR)/opt/clinttools/files/share/applications/clinttools.desktop \
+		$(DESTDIR)$(PREFIX)/share/applications/clinttools.desktop || true
+	ln -rs $(DESTDIR)/opt/clinttools/files/share/mime/packages/clinttools.xml \
+		$(DESTDIR)$(PREFIX)/share/mime/packages/clinttools.xml || true
 
 uninstall_symlinks:
-	rm -rf $(DESTDIR)$(PREFIX)/share/doc/stargate
+	rm -rf $(DESTDIR)$(PREFIX)/share/doc/clinttools
 	rm -f \
-		$(DESTDIR)$(PREFIX)/bin/stargate \
-		$(DESTDIR)$(PREFIX)/share/pixmaps/stargate.png \
-		$(DESTDIR)$(PREFIX)/share/pixmaps/stargate.ico \
-		$(DESTDIR)$(PREFIX)/share/applications/stargate.desktop \
-		$(DESTDIR)$(PREFIX)/share/mime/packages/stargate.xml
+		$(DESTDIR)$(PREFIX)/bin/clinttools \
+		$(DESTDIR)$(PREFIX)/share/pixmaps/clinttools.png \
+		$(DESTDIR)$(PREFIX)/share/pixmaps/clinttools.ico \
+		$(DESTDIR)$(PREFIX)/share/applications/clinttools.desktop \
+		$(DESTDIR)$(PREFIX)/share/mime/packages/clinttools.xml
 
 install_macos:
 	PREFIX=/usr/local make install
@@ -116,7 +116,7 @@ macos: commit_hash soundtouch sbsms
 	OPTIMIZE_FLAGS= CC=clang CC_ARGS= make -C engine macos
 	cp -f \
 		vendor/sbsms/cli/sbsms \
-		vendor/stargate-soundstretch \
+		vendor/clinttools-soundstretch \
 		/usr/local/bin/rubberband \
 		engine/
 	./macos/link.py
@@ -128,7 +128,7 @@ macos_arm: commit_hash soundtouch
 	mv vendor/sbsms/cli/sbsms engine/
 	cp -f \
 		/opt/homebrew/bin/rubberband \
-		vendor/stargate-soundstretch \
+		vendor/clinttools-soundstretch \
 		engine/
 	./macos/link.py
 
@@ -186,7 +186,7 @@ soundtouch:
 	cd vendor/soundtouch && \
 		$(CXX) -std=c++11 -Iinclude/ -O3 \
 		`find source/SoundTouch source/SoundStretch -name '*.cpp'` \
-		-o ../stargate-soundstretch
+		-o ../clinttools-soundstretch
 
 tag_release:
 	git tag release-$(MINOR)
