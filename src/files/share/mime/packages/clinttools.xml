@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="text/clinttools.project">
+    <comment>Clint Tools DAW project file</comment>
+    <glob pattern="clinttools.project"/>
+  </mime-type>
+</mime-info>
