@@ -68,7 +68,7 @@ also works well on low-end hardware using the built-in plugins, even using
 heavy synthesizer patches with many unison voices.
 
 ### How we achieve this
-- Engine and plugins written in C. C++ is capable of similar performance, but
+- Engine and plugins written in C, C++ are capable of similar performance, but
   only if you use the subset of it that looks exactly like C. C is more
   easily portable, with stable language standards that can be universally
   compiled on any platform.
