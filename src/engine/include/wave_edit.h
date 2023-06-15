@@ -3,7 +3,7 @@
 
 #include "compiler.h"
 #include "osc.h"
-#include "stargate.h"
+#include "clinttools.h"
 
 #define WN_CONFIGURE_KEY_LOAD_AB_OPEN "abo"
 #define WN_CONFIGURE_KEY_WE_SET "we"

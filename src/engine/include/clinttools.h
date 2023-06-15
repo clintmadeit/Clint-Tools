@@ -1,5 +1,5 @@
-#ifndef STARGATE_H
-#define STARGATE_H
+#ifndef CLINTTOOLS_H
+#define CLINTTOOLS_H
 
 #include <pthread.h>
 
@@ -81,7 +81,7 @@ enum SequencerEventType {
 #define SG_CONFIGURE_KEY_ENGINE "engine"
 #define SG_CONFIGURE_KEY_CLEAN_AUDIO_POOL "cwp"
 
-enum StargateHosts {
+enum ClinttoolsHosts {
     SG_HOST_DAW = 0,
     SG_HOST_WAVE_EDIT = 1,
 };
@@ -254,7 +254,7 @@ struct SgWorkerThread {
     char end_padding[CACHE_LINE_SIZE];
 };
 
-struct _t_stargate {
+struct _t_clinttools {
     t_sg_thread_storage thread_storage[MAX_WORKER_THREADS];
     t_sg_host * current_host;
     t_sg_host hosts[SG_HOST_COUNT];
@@ -308,7 +308,7 @@ typedef struct {
     char pad2[CACHE_LINE_SIZE];
 } t_track_routing;
 
-void g_stargate_get(SGFLT, t_midi_device_list*);
+void g_clinttools_get(SGFLT, t_midi_device_list*);
 t_track * g_track_get(int, SGFLT);
 void v_zero_buffer(struct SamplePair*, int);
 double v_print_benchmark(

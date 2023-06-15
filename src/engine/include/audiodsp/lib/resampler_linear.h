@@ -11,7 +11,7 @@ struct ResamplerStereoPair {
 typedef struct ResamplerStereoPair(*resample_generate)(void*);
 
 // Generates audio from a source function at a different (or same) sample
-// rate as Stargate, and resamples the audio using linear interpolation
+// rate as Clint Tools, and resamples the audio using linear interpolation
 struct ResamplerLinear {
     // 1 if there is no need to resample, otherwise 0
     int same;

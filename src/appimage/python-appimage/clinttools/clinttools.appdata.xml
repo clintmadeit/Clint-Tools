@@ -4,14 +4,14 @@
     <metadata_license>GPL3</metadata_license>
     <project_license>GPL3</project_license>
     <name>Clint Tools</name>
-    <summary>Stargate DAW</summary>
+    <summary>Clint Tools DAW</summary>
     <description>
 		<p> Clint Tools DAW is a digital audio workstation with a comprehensive
 			set of plugins included
         </p>
     </description>
-    <launchable type="desktop-id">clint-tools.desktop</launchable>
-	<url type="homepage">https://github.com/clint-toolsdaw</url>
+    <launchable type="desktop-id">clinttools.desktop</launchable>
+	<url type="homepage">http://clinttools.clintmadeit.tech</url>
     <provides>
         <binary>python{{ python-version }}</binary>
     </provides>

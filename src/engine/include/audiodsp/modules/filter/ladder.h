@@ -1,5 +1,5 @@
-#ifndef STARGATE_LADDER_H
-#define STARGATE_LADDER_H
+#ifndef CLINTTOOLS_LADDER_H
+#define CLINTTOOLS_LADDER_H
 
 #include "compiler.h"
 

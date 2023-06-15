@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="1">
-    <title>Stargate DAW</title>
+    <title>Clint Tools DAW</title>
     <allowed-os-versions>
         <os-version min="10.10"/>
     </allowed-os-versions>
-    <pkg-ref id="com.github.stargatedaw.stargate"/>
+    <pkg-ref id="com.github.clinttoolsdaw.clinttools"/>
     <options 
         customize="never" 
         require-scripts="false" 
@@ -12,15 +12,15 @@
     />
     <choices-outline>
         <line choice="default">
-            <line choice="com.github.stargatedaw.stargate"/>
+            <line choice="com.github.clinttoolsdaw.clinttools"/>
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="com.github.stargatedaw.stargate" visible="false">
-        <pkg-ref id="com.github.stargatedaw.stargate"/>
+    <choice id="com.github.clinttoolsdaw.clinttools" visible="false">
+        <pkg-ref id="com.github.clinttoolsdaw.clinttools"/>
     </choice>
     <pkg-ref 
-        id="com.github.stargatedaw.stargate" 
+        id="com.github.clinttoolsdaw.clinttools"
         version="0" 
         onConclusion="none"
     >Distribution.pkg</pkg-ref>

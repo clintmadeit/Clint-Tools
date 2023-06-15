@@ -1,5 +1,5 @@
 #ARG IMAGE=appimagecrafters/appimage-builder
-ARG IMAGE=stargate-base
+ARG IMAGE=Clint Tools-base
 
 FROM ${IMAGE} as python
 

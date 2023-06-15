@@ -1,11 +1,11 @@
 # Raspberry Pi4
-Stargate UI runs adequately on an rpi4, with some necessary tweaks.
+Clint Tools UI runs adequately on an rpi4, with some necessary tweaks.
 The engine is very optimized and runs adequately without tweaks, but the
 UI will lag unless additional optimizations are made to the operating system.
 
 ## Operating System
 
-We strongly recommend Manjaro (we use KDE, other desktops may work), aarch64
+We strongly recommend Manjaro (we use KDE, other desktops may work), arch64
 for Raspberry Pi 4.  You can use the official `Raspberry Pi Imager` utility to
 download and install to a micro-SD card.  Be sure to use `gparted` or similar
 to increase the size of the partition after imaging to use the entire micro-SD
@@ -21,12 +21,12 @@ for rpi4 because:
 
 - Much smoother graphics, even when running a desktop like KDE.  Not sure why
   that is, probably newer, better GPU drivers and saner graphic effects config
-- PyQt6 is available, which is much better than PyQt5 for running Stargate DAW.
+- PyQt6 is available, which is much better than PyQt5 for running Clint Tools DAW.
   Qt6 also has much better support for various alternative platforms like ARM.
 - It seems to be the most stable, polished and reliable distro for the rpi4,
   much better in our experience than Raspbian/NOOBS, Ubuntu and Fedora.
 
-### Installing Stargate DAW
+### Installing Clint Tools DAW
 
 [See the Arch Linux instructions](../../docs/troubleshooting//arch_linux.md)
 
@@ -77,7 +77,7 @@ systemctl enable cpupower
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 ```
 
-### Manually (you will need to do this every time before running Stargate)
+### Manually (you will need to do this every time before running Clint Tools)
 ```
 # Become root
 sudo -i

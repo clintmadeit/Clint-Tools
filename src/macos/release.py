@@ -7,6 +7,7 @@ import platform
 import shutil
 import subprocess
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -17,6 +18,7 @@ def parse_args():
         help='Build a PKG installer instead of a DMG',
     )
     return parser.parse_args()
+
 
 ARGS = parse_args()
 
@@ -29,7 +31,7 @@ with open('meta.json') as f:
     MINOR_VERSION = j['version']['minor']
 
 CWD = os.path.abspath(
-        os.path.join(
+    os.path.join(
         os.path.dirname(__file__),
         '..',
     ),
@@ -49,7 +51,7 @@ elif ARCH == 'arm64':
 else:
     assert False, f"Unknown arch. {ARCH}"
 
-BUNDLE = 'Stargate DAW.app'
+BUNDLE = 'Clint Tools DAW.app'
 BUNDLE_PATH = os.path.join('dist', BUNDLE)
 if os.path.isdir(BUNDLE_PATH):
     shutil.rmtree(BUNDLE_PATH)
@@ -65,17 +67,18 @@ os.chdir('dist')
 
 ARCH_NAMES = {
     'x86_64': 'intel',
-    'arm64': 'm1',
+    'arm64': 'm1' 'm2',
 }
 
+
 def build_dmg():
-    DMG = f'StargateDAW-{MINOR_VERSION}-macos-{ARCH_NAMES[ARCH]}-{ARCH}.dmg'
+    DMG = f'clinttoolsDAW-{MINOR_VERSION}-macos-{ARCH_NAMES[ARCH]}-{ARCH}.dmg'
     if os.path.exists(DMG):
         os.remove(DMG)
 
     subprocess.check_call([
         'create-dmg',
-        '--volname', 'Stargate DAW',
+        '--volname', 'Clint Tools DAW',
         '--icon', BUNDLE, '50', '120',
         '--hide-extension', BUNDLE,
         '--app-drop-link', '300', '120',
@@ -84,18 +87,19 @@ def build_dmg():
         BUNDLE,
     ])
 
+
 def build_pkg():
-    PKG = f'StargateDAW-{MINOR_VERSION}-macos-{ARCH_NAMES[ARCH]}-{ARCH}.pkg'
+    PKG = f'clinttoolsDAW-{MINOR_VERSION}-macos-{ARCH_NAMES[ARCH]}-{ARCH}.pkg'
     subprocess.check_call([
         'pkgbuild',
         '--root', BUNDLE,
-        '--identifier', 'com.github.stargatedaw.stargate',
+        '--identifier', 'com.github.clinttoolsdaw.clinttools',
         '--scripts', '../macos/Scripts',
         '--install-location', f"/Applications/{BUNDLE}",
         'Distribution.pkg',
     ])
     # Distribution.xml generated with:
-    #   productbuild --synthesize --package Distribution.pkg Distribution.xml
+    #   product build --synthesize --package Distribution.pkg Distribution.xml
     subprocess.check_call([
         'productbuild',
         '--distribution', '../macos/Distribution.xml',
@@ -104,8 +108,8 @@ def build_pkg():
         PKG,
     ])
 
+
 if ARGS.pkg:
     build_pkg()
 else:
     build_dmg()
-

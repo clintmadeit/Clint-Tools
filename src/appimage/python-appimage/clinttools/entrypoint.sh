@@ -5,4 +5,4 @@ if [ -z "$LD_LIBRARY_PATH" ]; then
 fi
 
 {{ python-executable }} \
-	-u "${APPDIR}/opt/stargate/scripts/stargate" "$@"
+	-u "${APPDIR}/opt/clinttools/scripts/clinttools" "$@"

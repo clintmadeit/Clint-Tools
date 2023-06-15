@@ -18,18 +18,18 @@ the story:  Don't update Homebrew or any dependencies, ever, especially once
 your hardware is out of support.
 
 Also note that you may need to disable the Mac OS X firewall (if enabled) or
-add rules, as it may block the Stargate UI and engine from communicating over
+add rules, as it may block the clinttools UI and engine from communicating over
 UDP sockets on localhost.  You will need the following rules:
 ```
-stargate: 31909
-stargate-engine: 31999
+clinttools: 31909
+clinttools-engine: 31999
 ```
 
 ### Build and run locally
 ```
 # Download and build the source code
-git clone --recursive https://github.com/stargateaudio/stargate.git
-cd stargate/src
+git clone --recursive https://github.com/clinttoolsaudio/clinttools.git
+cd clinttools/src
 ./macos/homebrew_deps.sh
 python3 -m venv venv
 . venv/bin/activate
@@ -39,7 +39,7 @@ make sbsms
 
 # Run locally
 make mac_osx
-python3 ./scripts/stargate
+python3 ./scripts/clinttools
 
 # Package
 ./macos/release.py

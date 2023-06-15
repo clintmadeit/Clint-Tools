@@ -1,5 +1,5 @@
-#ifndef _STARGATE_CLIP_H
-#define _STARGATE_CLIP_H
+#ifndef _CLINTTOOLS_CLIP_H
+#define _CLINTTOOLS_CLIP_H
 
 #include "compiler.h"
 

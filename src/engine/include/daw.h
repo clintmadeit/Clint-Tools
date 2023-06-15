@@ -1,7 +1,7 @@
 #ifndef DAW_H
 #define DAW_H
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "audio/item.h"
 #include "compiler.h"
 #include "daw/metronome.h"

@@ -1,6 +1,6 @@
 #!/bin/sh -xe
 
-cd /clint-tools
+cd /clinttools
 VERSION=$(jq .version.minor src/meta.json)
 
 cd dist/
@@ -9,13 +9,13 @@ rm -rf squashfs-root
 cd ../src/
 make clean
 make
-DESTDIR=/clint-tools/dist/squashfs-root PREFIX=/usr make install_self_contained
+DESTDIR=/clinttools/dist/squashfs-root PREFIX=/usr make install_self_contained
 
 cp -r \
     sg_py_vendor \
-    /clint-tools/dist/squashfs-root/opt/python3.10/lib/python3.10/site-packages/
+    /clinttools/dist/squashfs-root/opt/python3.10/lib/python3.10/site-packages/
 
-export DESTDIR=/clint-tools/dist/squashfs-root
+export DESTDIR=/clinttools/dist/squashfs-root
 export PREFIX=/usr
 cd /root/libsndfile-1.1.0/
 make install
@@ -39,7 +39,7 @@ PACKAGES=$(apt-cache depends --recurse --no-recommends --no-suggests \
 	vorbis-tools \
 | grep "^\w" | grep -vE 'gcc|libc|libstdc|perl' | sort -u)
 
-cd /clint-tools/dist
+cd /clinttools/dist
 mkdir -p packages/
 cd packages/
 apt-get download ${PACKAGES}
@@ -53,5 +53,5 @@ dpkg -i --log=filename --root=squashfs-root/ packages/* || true
 
 #appimagetool -n \
 #	squashfs-root/ \
-#	StargateDAW-${VERSION}-linux-x86_64.AppImage
+#	ClintToolsDAW-${VERSION}-linux-x86_64.AppImage
 

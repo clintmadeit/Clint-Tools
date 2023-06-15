@@ -64,7 +64,7 @@ extern SGPATHSTR INSTALL_PREFIX[4096];
     #define SG_THREAD_LOCAL
 #endif
 
-#define STARGATE_VERSION "stargate"
+#define CLINTTOOLS_VERSION "clinttools"
 #define prefetch __builtin_prefetch
 #define PREFETCH_STRIDE 64
 #define likely(x)   __builtin_expect((x),1)

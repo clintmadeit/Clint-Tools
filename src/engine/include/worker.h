@@ -3,7 +3,7 @@
 
 #include <unistd.h>
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "compiler.h"
 #include "hardware/midi.h"
 

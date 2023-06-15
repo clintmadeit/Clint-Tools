@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=stargate
-Exec=stargate
+Name=Clint Tools
+Exec=Clint Tools
 Comment=Digital Audio Workstation (DAW)
-Icon=stargate
+Icon=clinttools
 Categories=System;
 #Terminal=true

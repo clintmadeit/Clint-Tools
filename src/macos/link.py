@@ -8,20 +8,23 @@ import os
 import shutil
 import subprocess
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     return parser.parse_args()
 
+
 args = parse_args()
 
 CWD = os.path.abspath(
-        os.path.join(
+    os.path.join(
         os.path.dirname(__file__),
         '..',
         'engine',
     ),
 )
 os.chdir(CWD)
+
 
 def relink(binary):
     otool = subprocess.check_output([
@@ -35,12 +38,12 @@ def relink(binary):
             continue
         dylib = arr[0]
         if (
-            (
-                dylib.startswith('/usr/local/') 
-                or
-                dylib.startswith('/opt/homebrew/') 
-            ) and 
-            dylib.endswith('.dylib')
+                (
+                        dylib.startswith('/usr/local/')
+                        or
+                        dylib.startswith('/opt/homebrew/')
+                ) and
+                dylib.endswith('.dylib')
         ):
             basename = os.path.basename(dylib)
             print(
@@ -58,8 +61,8 @@ def relink(binary):
                 shutil.copyfile(dylib, basename)
                 relink(basename)
 
-BINARIES = ['stargate-engine', 'rubberband', 'sbsms']
+
+BINARIES = ['clinttools-engine', 'rubberband', 'sbsms']
 
 for binary in BINARIES:
     relink(binary)
-
