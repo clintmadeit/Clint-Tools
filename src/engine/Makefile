@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-NAME ?= stargate-engine
+NAME ?= clinttools-engine
 
 # Compiler flags
 CC ?= gcc
@@ -51,7 +51,7 @@ MINGW_LINK_FLAGS ?= \
 	-I/mingw64/include -lpthread $(PORTMIDI_FLAG) -lportaudio $(LDFLAGS) \
 	-lsndfile -lfftw3f -lfftw3 $(MATH_LIB_FLAG) -lws2_32 -lDbgHelp \
 	-lavrt -lshlwapi
-MINGW_STRIP ?= strip stargate-engine.exe
+MINGW_STRIP ?= strip clinttools-engine.exe
 
 
 # Debugging flags
@@ -171,7 +171,7 @@ lines-of-code:
 
 macos:
 	CC=clang make engine
-	strip stargate-engine
+	strip clinttools-engine
 
 macos_arm:
 	OPTIMIZE_FLAGS= CC=clang \
@@ -183,14 +183,14 @@ macos_arm:
 
 mingw:
 	# Build the Windows engine using MSYS2
-	rm -f stargate-engine.pdb
+	rm -f clinttools-engine.pdb
 	make -C .. commit_hash
 	OPTIMIZE_FLAGS= LINK_FLAGS="$(MINGW_LINK_FLAGS)" make engine
 	$(MINGW_STRIP)
 	# To generate Windows debug symbols,  run the following command in the
 	# Visual Studio Developer Command Prompt from the engine directory:
 	#
-	# .\cv2pdb\cv2pdb.exe .\stargate-engine.exe
+	# .\cv2pdb\cv2pdb.exe .\clinttools-engine.exe
 
 mingw_debug:
 	OPTIMIZE_FLAGS= LINK_FLAGS="$(MINGW_LINK_FLAGS)" make debug
