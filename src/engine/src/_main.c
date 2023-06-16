@@ -1,5 +1,5 @@
 /*
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ GNU General Public License for more details.
 #include "hardware/config.h"
 #include "hardware/midi.h"
 #include "soundcheck.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "wave_edit.h"
 #include "worker.h"
 #if SG_OS == _OS_MACOS
@@ -114,7 +114,7 @@ void print_help(){
         "%s-engine install_prefix project_dir ui_pid "
         "huge_pages frames_per_second worker_threds "
         "[--sleep --no-hardware]\n",
-        STARGATE_VERSION
+        CLINTTOOLS_VERSION
     );
     printf(
         "--no-hardware: Do not use audio or MIDI hardware, for debugging\n"
@@ -128,10 +128,10 @@ void print_help(){
         "[--no-file]\n"
         "--no-print-progress: Do not print progress updates\n"
         "--no-file: Do not create the rendered file\n\n",
-        STARGATE_VERSION
+        clinttools_VERSION
     );
     printf("Sound check (play a short test tone and exit):\n");
-    printf("%s soundcheck [/path/to/device.txt]\n\n", STARGATE_VERSION);
+    printf("%s soundcheck [/path/to/device.txt]\n\n", CLINTTOOLS_VERSION);
 }
 
 int _main(int argc, SGPATHSTR** argv){
@@ -363,7 +363,7 @@ int daw_render(int argc, SGPATHSTR** argv){
         f_output[1][f_i] = 0.0f;
     }
 
-    STARGATE->sample_count = f_buffer_size;
+    clinttools->sample_count = f_buffer_size;
 
     v_daw_offline_render_prep(DAW);
 
@@ -634,7 +634,7 @@ NO_OPTIMIZATION int main_loop(){
 
     log_info("Exiting main loop");
     stop_engine();
-    log_info("Stargate main() returning");
+    log_info("clinttools main() returning");
     return 0;
 }
 
@@ -659,13 +659,13 @@ int v_configure(
         }
     }
 
-    if(!strcmp(path, "/stargate/wave_edit")){
+    if(!strcmp(path, "/clinttools/wave_edit")){
         v_we_configure(key, value);
         return 0;
-    } else if(!strcmp(path, "/stargate/daw")){
+    } else if(!strcmp(path, "/clinttools/daw")){
         v_daw_configure(key, value);
         return 0;
-    } else if(!strcmp(path, "/stargate/main")){
+    } else if(!strcmp(path, "/clinttools/main")){
         v_sg_configure(key, value);
         return 0;
     }
