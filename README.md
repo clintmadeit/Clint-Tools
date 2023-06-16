@@ -5,17 +5,17 @@ features, for all genres of music. It is African-based equipped with a variety o
 and why, read the
 [project design principles](docs/project_design_principles.md).
 
-# Links
+# Useful Links
 - [Download Clint-Tools demo projects](
     https://github.com/clintmadeit/ClintToolsv1_demo_projects)
 - [Download instruments for Sampler1](https://github.com/sfzinstruments)
 - [Download or contribute to our public domain sample pack](
     https://github.com/clintmadeit/ClintTools_sample_pack)
-- Source code is mirrored on [Gitlab](https://gitlab.com/Clint-Tools) and
+- Source code is mirrored on [Gitlab](https://gitlab.com/clinttools) and
   [Code-berg](https://codeberg.org/Clint-Tools), however, releases, issues and
-  pull requests are only on [GitHub](https://github.com/Clint-Tools)
+  pull requests are only on [GitHub](https://github.com/clinttools)
 
-# Features
+# DAW Features
 - A digital audio workstation (DAW) with a powerful pattern-based workflow
 - A comprehensive suite of built-in instrument and effect plugins
 - A basic wave editor
