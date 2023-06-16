@@ -208,7 +208,7 @@ void get_file_setting(
         "%s/%s/config/%s.txt", 
 #endif
         f_home, 
-	STARGATE_VERSION,
+	CLINTTOOLS_VERSION,
         a_name
     );
 
