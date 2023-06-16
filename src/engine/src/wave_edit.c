@@ -1,5 +1,5 @@
 /*
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@ GNU General Public License for more details.
 */
 
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "wave_edit.h"
 #include "csv/1d.h"
 #include "files.h"
@@ -22,7 +22,7 @@ GNU General Public License for more details.
 t_wave_edit * wave_edit;
 
 void g_wave_edit_get(){
-    SGFLT f_sample_rate = STARGATE->thread_storage[0].sample_rate;
+    SGFLT f_sample_rate = CLINTTOOLS->thread_storage[0].sample_rate;
     clalloc((void**)&wave_edit, sizeof(t_wave_edit));
     wave_edit->fx_enabled = 1;
     wave_edit->ab_wav_item = 0;
@@ -43,18 +43,18 @@ void v_we_set_playback_mode(
     {
         case 0: //stop
         {
-            int f_old_mode = STARGATE->playback_mode;
+            int f_old_mode = clinttools->playback_mode;
 
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
 
             if(f_old_mode == PLAYBACK_MODE_REC)
@@ -67,7 +67,7 @@ void v_we_set_playback_mode(
         {
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
             if(wave_edit->ab_wav_item)
@@ -79,17 +79,17 @@ void v_we_set_playback_mode(
                 v_svf_reset(&wave_edit->ab_audio_item->lp_filters[0]);
             }
 
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
 
             break;
         }
         case 2:  //record
-            if(STARGATE->playback_mode == PLAYBACK_MODE_REC)
+            if(CLINTTOOLS->playback_mode == PLAYBACK_MODE_REC)
             {
                 return;
             }
@@ -98,14 +98,14 @@ void v_we_set_playback_mode(
 
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
             break;
         default:
@@ -121,14 +121,14 @@ void v_we_set_playback_mode(
 void v_we_export(t_wave_edit * self, const SGPATHSTR* a_file_out){
     int f_i;
 
-    pthread_spin_lock(&STARGATE->main_lock);
-    STARGATE->is_offline_rendering = 1;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
+    CLINTTOOLS->is_offline_rendering = 1;
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
-    SGFLT f_sample_rate = STARGATE->thread_storage[0].sample_rate;
+    SGFLT f_sample_rate = CLINTTOOLS->thread_storage[0].sample_rate;
 
     long f_size = 0;
-    long f_block_size = (STARGATE->sample_count);
+    long f_block_size = (CLINTTOOLS->sample_count);
 
     SGFLT f_output[f_block_size * 2];
     struct SamplePair f_buffer[f_block_size];
@@ -242,9 +242,9 @@ void v_we_export(t_wave_edit * self, const SGPATHSTR* a_file_out){
 
     v_write_to_file(f_tmp_finished, "finished");
 
-    pthread_spin_lock(&STARGATE->main_lock);
-    STARGATE->is_offline_rendering = 0;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
+    CLINTTOOLS->is_offline_rendering = 0;
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
 #if SG_OS == _OS_LINUX
     chown_file(a_file_out);
@@ -257,7 +257,7 @@ void v_set_we_file(t_wave_edit * self, const char * a_uid){
     int uid = atoi(a_uid);
 
     t_audio_pool_item * f_result = g_audio_pool_get_item_by_uid(
-        STARGATE->audio_pool,
+        CLINTTOOLS->audio_pool,
         uid
     );
 
@@ -266,13 +266,13 @@ void v_set_we_file(t_wave_edit * self, const char * a_uid){
         ||
         i_audio_pool_item_load(f_result, 1)
     ){
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
 
         self->ab_wav_item = f_result;
 
         self->ab_audio_item->ratio = self->ab_wav_item->ratio_orig;
 
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
     } else {
         log_info("i_audio_pool_item_load failed in v_set_we_file");
     }
@@ -282,13 +282,13 @@ void we_track_reload(){
     t_track* old = wave_edit->track_pool[0];
     t_track* new = g_track_get(
         0,
-        STARGATE->thread_storage[0].sample_rate
+        CLINTTOOLS->thread_storage[0].sample_rate
     );
     v_open_track(new, wave_edit->tracks_folder, 0);
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
     wave_edit->track_pool[0] = new;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
     if(old){
         track_free(old);
@@ -305,7 +305,7 @@ void v_we_open_project(){
 #else
         "%s/projects/wave_edit",
 #endif
-        STARGATE->project_folder
+        CLINTTOOLS->project_folder
     );
 
     sg_path_snprintf(
@@ -329,16 +329,16 @@ void v_set_wave_editor_item(
     sg_snprintf(f_current_string->array, MEDIUM_STRING, "%s", a_val);
     t_audio_item * f_old = self->ab_audio_item;
     t_audio_item * f_result = g_audio_item_load_single(
-        STARGATE->thread_storage[0].sample_rate,
+        CLINTTOOLS->thread_storage[0].sample_rate,
         f_current_string,
         0,
         0,
         self->ab_wav_item
     );
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
     self->ab_audio_item = f_result;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
     g_free_2d_char_array(f_current_string);
     if(f_old){
@@ -373,7 +373,7 @@ void v_run_wave_editor(
         }
     }
 
-    if(STARGATE->playback_mode == PLAYBACK_MODE_PLAY)
+    if(CLINTTOOLS->playback_mode == PLAYBACK_MODE_PLAY)
     {
         for(f_i = 0; f_i < sample_count; ++f_i)
         {
@@ -386,7 +386,7 @@ void v_run_wave_editor(
                 v_audio_item_set_fade_vol(
                     self->ab_audio_item,
                     0,
-                    &STARGATE->thread_storage[0]
+                    &CLINTTOOLS->thread_storage[0]
                 );
 
                 if(self->ab_wav_item->channels == 1)
@@ -429,7 +429,7 @@ void v_run_wave_editor(
                 );
 
                 if(
-                    STARGATE->playback_mode != PLAYBACK_MODE_PLAY
+                    CLINTTOOLS->playback_mode != PLAYBACK_MODE_PLAY
                     &&
                     self->ab_audio_item->adsrs[0].stage < ADSR_STAGE_RELEASE
                 ){
@@ -485,7 +485,7 @@ void v_run_wave_editor(
     v_pkm_run(
         f_track->peak_meter,
         f_buff,
-        STARGATE->sample_count
+        CLINTTOOLS->sample_count
     );
 }
 
@@ -506,7 +506,7 @@ void v_we_osc_send(t_osc_send_data * a_buffers){
 
     v_queue_osc_message("peak", a_buffers->f_tmp1);
 
-    if(STARGATE->playback_mode == 1)
+    if(CLINTTOOLS->playback_mode == 1)
     {
         SGFLT f_frac =
         (SGFLT)(wave_edit->ab_audio_item->sample_read_heads[
@@ -517,40 +517,40 @@ void v_we_osc_send(t_osc_send_data * a_buffers){
         v_queue_osc_message("wec", a_buffers->f_msg);
     }
 
-    if(STARGATE->osc_queue_index > 0)
+    if(CLINTTOOLS->osc_queue_index > 0)
     {
-        for(f_i = 0; f_i < STARGATE->osc_queue_index; ++f_i)
+        for(f_i = 0; f_i < CLINTTOOLS->osc_queue_index; ++f_i)
         {
             strcpy(
                 a_buffers->messages[f_i].key,
-                STARGATE->osc_messages[f_i].key
+                CLINTTOOLS->osc_messages[f_i].key
             );
             strcpy(
                 a_buffers->messages[f_i].value,
-                STARGATE->osc_messages[f_i].value
+                CLINTTOOLS->osc_messages[f_i].value
             );
         }
 
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
 
         //Now grab any that may have been written since the previous copy
 
-        while(f_i < STARGATE->osc_queue_index){
+        while(f_i < CLINTTOOLS->osc_queue_index){
             strcpy(
                 a_buffers->messages[f_i].key,
-                STARGATE->osc_messages[f_i].key
+                CLINTTOOLS->osc_messages[f_i].key
             );
             strcpy(
                 a_buffers->messages[f_i].value,
-                STARGATE->osc_messages[f_i].value
+                CLINTTOOLS->osc_messages[f_i].value
             );
             ++f_i;
         }
 
-        int f_index = STARGATE->osc_queue_index;
-        STARGATE->osc_queue_index = 0;
+        int f_index = CLINTTOOLS->osc_queue_index;
+        CLINTTOOLS->osc_queue_index = 0;
 
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
         a_buffers->f_tmp1[0] = '\0';
 
@@ -562,8 +562,8 @@ void v_we_osc_send(t_osc_send_data * a_buffers){
                 a_buffers->messages[f_i].key,
                 a_buffers->messages[f_i].value
             );
-            if(!STARGATE->is_offline_rendering){
-                v_ui_send("stargate/wave_edit", a_buffers->f_tmp2);
+            if(!CLINTTOOLS->is_offline_rendering){
+                v_ui_send("CLINTTOOLS/wave_edit", a_buffers->f_tmp2);
             }
         }
 
@@ -576,9 +576,9 @@ void set_fx_enabled(int enabled){
         "Enabled out of range %i", 
         enabled
     );
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
     wave_edit->fx_enabled = enabled;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 }
 
 void v_we_update_audio_inputs(){
@@ -636,7 +636,7 @@ void v_we_configure(const char* a_key, const char* a_value){
 void v_we_test(){
     log_info("Begin Wave-Next test");
 
-    STARGATE->sample_count = 512;
+    CLINTTOOLS->sample_count = 512;
 
     v_set_host(SG_HOST_WAVE_EDIT);
     v_we_set_playback_mode(wave_edit, PLAYBACK_MODE_REC, 0);

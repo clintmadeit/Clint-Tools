@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "audiodsp/lib/lmalloc.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "compiler.h"
 #include "globals.h"
 #include "osc.h"
@@ -30,14 +30,14 @@ void* v_osc_send_thread(void* a_arg){
     f_send_data->f_msg[0] = '\0';
 
     while(1){
-        pthread_mutex_lock(&STARGATE->audio_inputs_mutex);
-        quit_notifier = STARGATE->audio_recording_quit_notifier;
-        pthread_mutex_unlock(&STARGATE->audio_inputs_mutex);
+        pthread_mutex_lock(&CLINTTOOLS->audio_inputs_mutex);
+        quit_notifier = CLINTTOOLS->audio_recording_quit_notifier;
+        pthread_mutex_unlock(&CLINTTOOLS->audio_inputs_mutex);
         if(quit_notifier){
             break;
         }
 
-        STARGATE->current_host->osc_send(f_send_data);
+        CLINTTOOLS->current_host->osc_send(f_send_data);
         usleep(UI_SEND_USLEEP);
     }
 
@@ -54,8 +54,8 @@ void* v_osc_send_thread(void* a_arg){
  * a_value: The value, or an empty string if not value is required
  */
 void v_queue_osc_message(char* a_key, char* a_val){
-    pthread_spin_lock(&STARGATE->ui_spinlock);
-    if(STARGATE->osc_queue_index >= OSC_SEND_QUEUE_SIZE){
+    pthread_spin_lock(&CLINTTOOLS->ui_spinlock);
+    if(CLINTTOOLS->osc_queue_index >= OSC_SEND_QUEUE_SIZE){
         log_info(
             "Dropping OSC event to prevent buffer overrun: %s|%s",
             a_key,
@@ -63,19 +63,19 @@ void v_queue_osc_message(char* a_key, char* a_val){
         );
     } else {
         sg_snprintf(
-            STARGATE->osc_messages[STARGATE->osc_queue_index].key,
+            CLINTTOOLS->osc_messages[CLINTTOOLS->osc_queue_index].key,
             32,
             "%s",
             a_key
         );
         sg_snprintf(
-            STARGATE->osc_messages[STARGATE->osc_queue_index].value,
+            CLINTTOOLS->osc_messages[CLINTTOOLS->osc_queue_index].value,
             OSC_MAX_MESSAGE_SIZE,
             "%s",
             a_val
         );
-        ++STARGATE->osc_queue_index;
+        ++CLINTTOOLS->osc_queue_index;
     }
-    pthread_spin_unlock(&STARGATE->ui_spinlock);
+    pthread_spin_unlock(&CLINTTOOLS->ui_spinlock);
 }
 

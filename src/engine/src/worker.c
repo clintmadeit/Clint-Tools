@@ -9,7 +9,7 @@
 #include "globals.h"
 #include "osc.h"
 #include "project.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "wave_edit.h"
 #include "worker.h"
 
@@ -34,16 +34,16 @@
 void * v_worker_thread(void* a_arg){
     t_thread_args * f_args = (t_thread_args*)(a_arg);
     t_sg_thread_storage * f_storage =
-        &STARGATE->thread_storage[f_args->thread_num];
+        &CLINTTOOLS->thread_storage[f_args->thread_num];
     v_pre_fault_thread_stack(f_args->stack_size);
 
     int f_thread_num = f_args->thread_num;
     pthread_cond_t * f_track_cond =
-        &STARGATE->worker_threads[f_thread_num].track_cond;
+        &CLINTTOOLS->worker_threads[f_thread_num].track_cond;
     pthread_mutex_t * f_track_block_mutex =
-        &STARGATE->worker_threads[f_thread_num].track_block_mutex;
+        &CLINTTOOLS->worker_threads[f_thread_num].track_block_mutex;
     pthread_spinlock_t * f_lock =
-        &STARGATE->worker_threads[f_thread_num].lock;
+        &CLINTTOOLS->worker_threads[f_thread_num].lock;
 
 #if SG_OS == _OS_WINDOWS
     _windows_thread_pro_audio();
@@ -55,8 +55,8 @@ void * v_worker_thread(void* a_arg){
         pthread_mutex_unlock(f_track_block_mutex);
         pthread_spin_lock(f_lock);
 
-        if(STARGATE->worker_threads[f_thread_num].track_thread_quit_notifier){
-            STARGATE->worker_threads[
+        if(CLINTTOOLS->worker_threads[f_thread_num].track_thread_quit_notifier){
+            CLINTTOOLS->worker_threads[
                 f_thread_num].track_thread_quit_notifier = 2;
             pthread_spin_unlock(f_lock);
             log_info("Worker thread %i exiting...", f_thread_num);
@@ -83,12 +83,12 @@ void v_init_worker_threads(
     int f_stack_size = (1024 * 1024);
 
     if(SINGLE_THREAD){
-        STARGATE->worker_thread_count = 1;
+        CLINTTOOLS->worker_thread_count = 1;
     } else {
-        STARGATE->worker_thread_count = a_thread_count;
+        CLINTTOOLS->worker_thread_count = a_thread_count;
     }
 
-    log_info("Spawning %i worker threads", STARGATE->worker_thread_count);
+    log_info("Spawning %i worker threads", CLINTTOOLS->worker_thread_count);
 
     pthread_attr_t threadAttr;
     pthread_attr_init(&threadAttr);
@@ -117,8 +117,8 @@ void v_init_worker_threads(
     int f_i;
     char thread_name[64];
 
-    for(f_i = 1; f_i < STARGATE->worker_thread_count; ++f_i){
-        _thread = &STARGATE->worker_threads[f_i];
+    for(f_i = 1; f_i < CLINTTOOLS->worker_thread_count; ++f_i){
+        _thread = &CLINTTOOLS->worker_threads[f_i];
         _thread->track_thread_quit_notifier = 0;
         t_thread_args * f_args = (t_thread_args*)malloc(
             sizeof(t_thread_args)
@@ -126,29 +126,29 @@ void v_init_worker_threads(
         f_args->thread_num = f_i;
         f_args->stack_size = f_stack_size;
 
-        //pthread_mutex_init(&STARGATE->track_cond_mutex[f_i], NULL);
+        //pthread_mutex_init(&CLINTTOOLS->track_cond_mutex[f_i], NULL);
         pthread_cond_init(&_thread->track_cond, NULL);
         pthread_spin_init(&_thread->lock, 0);
         pthread_mutex_init(&_thread->track_block_mutex, NULL);
 #if SG_OS == _OS_MACOS
         pthread_setschedparam(
-            STARGATE->worker_threads[f_i].thread,
+            CLINTTOOLS->worker_threads[f_i].thread,
             RT_SCHED,
             &rt_sched_param
         );
 #endif
         pthread_create(
-            &STARGATE->worker_threads[f_i].thread,
+            &CLINTTOOLS->worker_threads[f_i].thread,
             &threadAttr,
             v_worker_thread,
             (void*)f_args
         );
         sg_snprintf(thread_name, 64, "Worker %i", f_i);
-        set_thread_name(STARGATE->worker_threads[f_i].thread, thread_name);
+        set_thread_name(CLINTTOOLS->worker_threads[f_i].thread, thread_name);
     }
 
     pthread_attr_destroy(&threadAttr);
-    STARGATE->audio_recording_quit_notifier = 0;
+    CLINTTOOLS->audio_recording_quit_notifier = 0;
 
     if(a_aux_threads){
         pthread_attr_t auxThreadAttr;
@@ -157,20 +157,20 @@ void v_init_worker_threads(
         pthread_attr_setstacksize(&auxThreadAttr, (1024 * 1024));
 
         pthread_create(
-            &STARGATE->audio_recording_thread,
+            &CLINTTOOLS->audio_recording_thread,
             &auxThreadAttr,
             v_audio_recording_thread,
             NULL
         );
-        set_thread_name(STARGATE->audio_recording_thread, "Audio Recording");
+        set_thread_name(CLINTTOOLS->audio_recording_thread, "Audio Recording");
 
         pthread_create(
-            &STARGATE->osc_queue_thread,
+            &CLINTTOOLS->osc_queue_thread,
             &auxThreadAttr,
             v_osc_send_thread,
-            (void*)STARGATE
+            (void*)CLINTTOOLS
         );
-        set_thread_name(STARGATE->osc_queue_thread, "OSC Queue");
+        set_thread_name(CLINTTOOLS->osc_queue_thread, "OSC Queue");
         pthread_attr_destroy(&auxThreadAttr);
     }
 }
@@ -184,16 +184,16 @@ NO_OPTIMIZATION void v_activate(
     int a_aux_threads
 ){
     /* Instantiate hosts */
-    g_stargate_get(a_sr, a_midi_devices);
+    g_CLINTTOOLS_get(a_sr, a_midi_devices);
 
-    STARGATE->hosts[SG_HOST_DAW] = (t_sg_host){
+    CLINTTOOLS->hosts[SG_HOST_DAW] = (t_sg_host){
         .run = v_daw_run_engine,
         .osc_send = v_daw_osc_send,
         .audio_inputs = v_daw_update_audio_inputs,
         .mix = v_default_mix,
     };
 
-    STARGATE->hosts[SG_HOST_WAVE_EDIT] = (t_sg_host){
+    CLINTTOOLS->hosts[SG_HOST_WAVE_EDIT] = (t_sg_host){
         .run = v_run_wave_editor,
         .osc_send = v_we_osc_send,
         .audio_inputs = v_we_update_audio_inputs,
@@ -225,15 +225,15 @@ void v_destructor(){
 
     SGPATHSTR tmp_sndfile_name[2048];
 
-    pthread_mutex_lock(&STARGATE->audio_inputs_mutex);
-    STARGATE->audio_recording_quit_notifier = 1;
-    pthread_mutex_unlock(&STARGATE->audio_inputs_mutex);
+    pthread_mutex_lock(&CLINTTOOLS->audio_inputs_mutex);
+    CLINTTOOLS->audio_recording_quit_notifier = 1;
+    pthread_mutex_unlock(&CLINTTOOLS->audio_inputs_mutex);
 
     for(f_i = 0; f_i < AUDIO_INPUT_TRACK_COUNT; ++f_i)
     {
-        if(STARGATE->audio_inputs[f_i].sndfile)
+        if(CLINTTOOLS->audio_inputs[f_i].sndfile)
         {
-            sf_close(STARGATE->audio_inputs[f_i].sndfile);
+            sf_close(CLINTTOOLS->audio_inputs[f_i].sndfile);
             sg_path_snprintf(
                 tmp_sndfile_name,
                 2048,
@@ -242,7 +242,7 @@ void v_destructor(){
 #else
                 "%s%i.wav",
 #endif
-                STARGATE->audio_tmp_folder,
+                CLINTTOOLS->audio_tmp_folder,
                 f_i
             );
 #if SG_OS == _OS_WINDOWS
@@ -255,23 +255,23 @@ void v_destructor(){
         }
     }
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
 
-    for(f_i = 1; f_i < STARGATE->worker_thread_count; ++f_i){
-        _thread = &STARGATE->worker_threads[f_i];
+    for(f_i = 1; f_i < CLINTTOOLS->worker_thread_count; ++f_i){
+        _thread = &CLINTTOOLS->worker_threads[f_i];
         pthread_mutex_lock(&_thread->track_block_mutex);
         _thread->track_thread_quit_notifier = 1;
         pthread_cond_broadcast(&_thread->track_cond);
         pthread_mutex_unlock(&_thread->track_block_mutex);
     }
 
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
     usleep(300000);
 
     //abort the application rather than hang indefinitely
-    for(f_i = 1; f_i < STARGATE->worker_thread_count; ++f_i){
-        _thread = &STARGATE->worker_threads[f_i];
+    for(f_i = 1; f_i < CLINTTOOLS->worker_thread_count; ++f_i){
+        _thread = &CLINTTOOLS->worker_threads[f_i];
         if(!pthread_spin_trylock(&_thread->lock)){
             log_warn("dtor: Unable to acquire lock for thread %i", f_i);
 	}
