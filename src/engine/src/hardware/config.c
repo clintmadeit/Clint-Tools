@@ -36,7 +36,7 @@ NO_OPTIMIZATION SGPATHSTR* default_device_file_path(){
 	"%s/%s/config/device.txt",
 #endif
         home, 
-	STARGATE_VERSION
+	CLINTTOOLS_VERSION
     );
 
     return result;

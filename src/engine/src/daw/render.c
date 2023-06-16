@@ -1,4 +1,4 @@
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 #include "files.h"
 
@@ -20,18 +20,18 @@ void v_daw_offline_render(
 
     int * f_tps = self->routing_graph->track_pool_sorted[0];
 
-    pthread_spin_lock(&STARGATE->main_lock);
-    STARGATE->is_offline_rendering = 1;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
+    CLINTTOOLS->is_offline_rendering = 1;
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
-    SGFLT f_sample_rate = STARGATE->thread_storage[0].sample_rate;
+    SGFLT f_sample_rate = CLINTTOOLS->thread_storage[0].sample_rate;
 
     int f_i, f_i2;
 
     long f_sample_count = 0;
 
     long f_size = 0;
-    long f_block_size = (STARGATE->sample_count);
+    long f_block_size = (CLINTTOOLS->sample_count);
 
     SGFLT * f_output = (SGFLT*)malloc(sizeof(SGFLT) * (f_block_size * 2));
 
@@ -241,9 +241,9 @@ void v_daw_offline_render(
 
     v_daw_panic(self);  //ensure all notes are off before returning
 
-    pthread_spin_lock(&STARGATE->main_lock);
-    STARGATE->is_offline_rendering = 0;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
+    CLINTTOOLS->is_offline_rendering = 0;
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 }
 
 void v_daw_offline_render_prep(t_daw * self){
@@ -252,7 +252,7 @@ void v_daw_offline_render_prep(t_daw * self){
     int f_i2;
     t_track * f_track;
     t_plugin * f_plugin;
-    SGFLT sample_rate = STARGATE->thread_storage[0].sample_rate;
+    SGFLT sample_rate = CLINTTOOLS->thread_storage[0].sample_rate;
 
     for(f_i = 0; f_i < DN_TRACK_COUNT; ++f_i){
         f_track = self->track_pool[f_i];

@@ -1,5 +1,5 @@
 #include "audiodsp/modules/multifx/multifx3knob.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 
 
@@ -7,16 +7,16 @@ void v_daw_update_audio_inputs()
 {
     v_update_audio_inputs(DAW->project_folder);
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
 
     int f_i;
     for(f_i = 0; f_i < AUDIO_INPUT_TRACK_COUNT; ++f_i)
     {
         DAW->ts[0].input_index[f_i] =
-            STARGATE->audio_inputs[f_i].output_track;
+            CLINTTOOLS->audio_inputs[f_i].output_track;
     }
 
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 }
 
 void v_daw_papifx_set_control(
@@ -26,9 +26,9 @@ void v_daw_papifx_set_control(
 ){
     int fx_index = port_num / 4;
     int control_index = port_num % 4;
-    t_audio_pool_item* ap_item = &STARGATE->audio_pool->items[ap_uid];
+    t_audio_pool_item* ap_item = &CLINTTOOLS->audio_pool->items[ap_uid];
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
 
     t_papifx_controls* controls = &ap_item->fx_controls.controls[fx_index];
     if(control_index == 3){
@@ -51,7 +51,7 @@ void v_daw_papifx_set_control(
     }
     ap_item->fx_controls.loaded = 1;
 
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 }
 
 void v_daw_paif_set_control(
@@ -70,13 +70,13 @@ void v_daw_paif_set_control(
     t_paif * f_sequence = f_audio_item->paif;
     t_per_audio_item_fx * f_item;
 
-    SGFLT f_sr = STARGATE->thread_storage[0].sample_rate;
+    SGFLT f_sr = CLINTTOOLS->thread_storage[0].sample_rate;
 
     if(!f_sequence){
         f_sequence = g_paif8_get();
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
         f_audio_item->paif = f_sequence;
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
     }
 
     if(!f_sequence->loaded){
@@ -85,17 +85,17 @@ void v_daw_paif_set_control(
         for(f_i = 0; f_i < 8; ++f_i){
             f_items[f_i] = g_paif_get(f_sr);
         }
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
         for(f_i = 0; f_i < 8; ++f_i){
             f_sequence->items[f_i] = f_items[f_i];
         }
         f_sequence->loaded = 1;
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
     }
 
     f_item = f_sequence->items[f_effect_index];
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
 
     if(f_control_index == 3){
         int f_fx_index = (int)a_val;
@@ -116,7 +116,7 @@ void v_daw_paif_set_control(
             f_item->a_knobs[1], f_item->a_knobs[2]);
     }
 
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
 }
 

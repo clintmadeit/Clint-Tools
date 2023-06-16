@@ -1,4 +1,4 @@
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 #include "files.h"
 
@@ -10,13 +10,13 @@ void v_daw_update_track_send(
     t_daw_routing_graph * f_old = self->routing_graph;
 
     if(a_lock){
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
     }
 
     self->routing_graph = f_graph;
 
     if(a_lock){
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
     }
 
     if(f_old){
@@ -62,7 +62,7 @@ t_daw_routing_graph * g_daw_routing_graph_get(t_daw * self)
 #else
         "%s/projects/daw/routing.txt",
 #endif
-        STARGATE->project_folder
+        CLINTTOOLS->project_folder
     );
 
     if(i_file_exists(f_tmp)){

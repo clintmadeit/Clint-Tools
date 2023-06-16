@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "compiler.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 
 
@@ -9,7 +9,7 @@ void daw_track_reload(int index){
     t_track* old = DAW->track_pool[index];
     t_track* _new = g_track_get(
         index,
-        STARGATE->thread_storage[0].sample_rate
+        CLINTTOOLS->thread_storage[0].sample_rate
     );
     v_open_track(_new, DAW->tracks_folder, index);
 
@@ -22,10 +22,10 @@ void daw_track_reload(int index){
     _new->extern_midi = old->extern_midi;
     _new->extern_midi_count = old->extern_midi_count;
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
     memcpy(_new->note_offs, old->note_offs, sizeof(_new->note_offs));
     DAW->track_pool[index] = _new;
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 
     track_free(old);
 }
@@ -273,7 +273,7 @@ void v_daw_process_track(
                     f_track->sc_buffers,
                     &f_track->sc_buffers_dirty,
                     a_ts,
-                    &STARGATE->thread_storage[a_thread_num]
+                    &CLINTTOOLS->thread_storage[a_thread_num]
                 );
             }
         }

@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 #include "files.h"
 
@@ -14,7 +14,7 @@ void v_daw_set_midi_devices(){
     t_midi_device * f_device;
     char name[1024];
 
-    if(!STARGATE->midi_devices){
+    if(!CLINTTOOLS->midi_devices){
         return;
     }
 
@@ -26,7 +26,7 @@ void v_daw_set_midi_devices(){
 #else
         "%s/projects/daw/midi_routing.txt",
 #endif
-        STARGATE->project_folder
+        CLINTTOOLS->project_folder
     );
 
     if(!i_file_exists(f_path)){
@@ -67,7 +67,7 @@ void v_daw_set_midi_devices(){
         name[1023] = '\0';
 
         int channel = 0;
-        // TODO Stargate v2: Remove if statement
+        // TODO clinttools v2: Remove if statement
         if(!f_current_string->eol){
             v_iterate_2d_char_array(f_current_string);
             channel = atoi(f_current_string->current_str);
@@ -76,8 +76,8 @@ void v_daw_set_midi_devices(){
         //v_iterate_2d_char_array_to_next_line(f_current_string);
 
         found_device = 0;
-        for(f_i2 = 0; f_i2 < STARGATE->midi_devices->count; ++f_i2){
-            f_device = &STARGATE->midi_devices->devices[f_i2];
+        for(f_i2 = 0; f_i2 < CLINTTOOLS->midi_devices->count; ++f_i2){
+            f_device = &CLINTTOOLS->midi_devices->devices[f_i2];
             if(!strcmp(name, f_device->name)){
                 v_daw_set_midi_device(f_on, f_i2, f_track_num, channel);
                 found_device = 1;
@@ -88,7 +88,7 @@ void v_daw_set_midi_devices(){
             log_warn(
                 "Did not find MIDI device '%s' in %i devices",
                 f_current_string->current_str,
-                STARGATE->midi_devices->count
+                CLINTTOOLS->midi_devices->count
             );
         }
     }
@@ -149,29 +149,29 @@ void v_daw_set_midi_device(
     f_route->output_track = a_output;
     f_route->channel = channel;
 
-    if(f_route->on && STARGATE->midi_devices->devices[a_device].loaded){
+    if(f_route->on && CLINTTOOLS->midi_devices->devices[a_device].loaded){
         log_info(
             "v_daw_set_midi_device: Enabling midi device on track %i",
             f_track_new->track_num
         );
-        f_track_new->midi_device = &STARGATE->midi_devices->devices[a_device];
+        f_track_new->midi_device = &CLINTTOOLS->midi_devices->devices[a_device];
         f_track_new->extern_midi =
-            STARGATE->midi_devices->devices[a_device].instanceEventBuffers;
+            CLINTTOOLS->midi_devices->devices[a_device].instanceEventBuffers;
         f_track_new->midi_device->route = f_route;
 
         midiPoll(f_track_new->midi_device);
         midiDeviceRead(
             f_track_new->midi_device,
-            STARGATE->thread_storage[0].sample_rate,
+            CLINTTOOLS->thread_storage[0].sample_rate,
             512
         );
 
-        STARGATE->midi_devices->devices[a_device].instanceEventCounts = 0;
-        STARGATE->midi_devices->devices[a_device].midiEventReadIndex = 0;
-        STARGATE->midi_devices->devices[a_device].midiEventWriteIndex = 0;
+        CLINTTOOLS->midi_devices->devices[a_device].instanceEventCounts = 0;
+        CLINTTOOLS->midi_devices->devices[a_device].midiEventReadIndex = 0;
+        CLINTTOOLS->midi_devices->devices[a_device].midiEventWriteIndex = 0;
 
         f_track_new->extern_midi_count =
-            &STARGATE->midi_devices->devices[a_device].instanceEventCounts;
+            &CLINTTOOLS->midi_devices->devices[a_device].instanceEventCounts;
     } else {
         log_info(
             "v_daw_set_midi_device: Disabling midi device on track %i",
@@ -235,10 +235,10 @@ void v_daw_process_external_midi(
         return;
     }
 
-    SGFLT f_sample_rate = STARGATE->thread_storage[a_thread_num].sample_rate;
-    SGFLT sr_recip = STARGATE->thread_storage[a_thread_num].sr_recip;
-    int f_playback_mode = STARGATE->playback_mode;
-    int f_midi_learn = STARGATE->midi_learn;
+    SGFLT f_sample_rate = CLINTTOOLS->thread_storage[a_thread_num].sample_rate;
+    SGFLT sr_recip = CLINTTOOLS->thread_storage[a_thread_num].sr_recip;
+    int f_playback_mode = CLINTTOOLS->playback_mode;
+    int f_midi_learn = CLINTTOOLS->midi_learn;
     SGFLT f_tempo = self->ts[0].tempo;
 
     midiPoll(a_track->midi_device);
@@ -353,7 +353,7 @@ void v_daw_process_external_midi(
             int controller = events[f_i2].param;
 
             if(f_midi_learn){
-                STARGATE->midi_learn = 0;
+                CLINTTOOLS->midi_learn = 0;
                 f_midi_learn = 0;
                 sg_snprintf(f_osc_msg, 1024, "%i", controller);
                 v_queue_osc_message("ml", f_osc_msg);

@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 #include "hardware/audio.h"
-#include "stargate.h"
+#include "clinttools.h"
 
 PaStream* PA_STREAM;
 
@@ -169,7 +169,7 @@ NO_OPTIMIZATION int open_audio_device(
     if(err != paNoError){
         log_error(
             "'%s' while starting device.  Please "
-            "re-configure your device and try starting Stargate again.",
+            "re-configure your device and try starting clinttools again.",
             Pa_GetErrorText(err)
         );
         return RET_CODE_AUDIO_DEVICE_ERROR;
@@ -242,7 +242,7 @@ int portaudioCallback(
     PaStreamCallbackFlags statusFlags,
     void *userData
 ){
-    STARGATE->out = (float*)outputBuffer;
+    CLINTTOOLS->out = (float*)outputBuffer;
     SGFLT *in = (SGFLT*)inputBuffer;
 
     if(unlikely(framesPerBuffer > FRAMES_PER_BUFFER)){

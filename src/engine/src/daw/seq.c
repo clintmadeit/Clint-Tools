@@ -1,6 +1,6 @@
 #include <pthread.h>
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 #include "files.h"
 
@@ -40,16 +40,16 @@ void v_daw_set_playback_mode(
             int f_i = 0;
             int f_i2;
             t_track * f_track;
-            int f_old_mode = STARGATE->playback_mode;
+            int f_old_mode = CLINTTOOLS->playback_mode;
 
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
             self->ts[0].suppress_new_audio_items = 1;
 
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
 
             f_i = 0;
 
@@ -79,7 +79,7 @@ void v_daw_set_playback_mode(
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
 
             if(f_old_mode == PLAYBACK_MODE_REC)
@@ -93,23 +93,23 @@ void v_daw_set_playback_mode(
         {
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
             v_daw_set_playback_cursor(self, a_beat);
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
             DAW->ts[0].is_first_period = 1;
             self->ts[0].suppress_new_audio_items = 0;
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
 
             break;
         }
         case 2:  //record
-            if(STARGATE->playback_mode == PLAYBACK_MODE_REC)
+            if(CLINTTOOLS->playback_mode == PLAYBACK_MODE_REC)
             {
                 return;
             }
@@ -118,17 +118,17 @@ void v_daw_set_playback_mode(
 
             if(a_lock)
             {
-                pthread_spin_lock(&STARGATE->main_lock);
+                pthread_spin_lock(&CLINTTOOLS->main_lock);
             }
 
             v_daw_set_playback_cursor(self, a_beat);
-            STARGATE->playback_mode = a_mode;
+            CLINTTOOLS->playback_mode = a_mode;
             DAW->ts[0].is_first_period = 1;
             self->ts[0].suppress_new_audio_items = 0;
 
             if(a_lock)
             {
-                pthread_spin_unlock(&STARGATE->main_lock);
+                pthread_spin_unlock(&CLINTTOOLS->main_lock);
             }
             break;
     }
@@ -423,7 +423,7 @@ NO_OPTIMIZATION void v_daw_open_tracks(){
 #else
         "%s/projects/daw/tracks.txt",
 #endif
-        STARGATE->project_folder
+        CLINTTOOLS->project_folder
     );
 
     if(i_file_exists(f_file_name))
@@ -543,14 +543,14 @@ void g_daw_song_get(t_daw* self, int a_lock){
     //t_daw_song * f_old = self->en_song;
 
     if(a_lock){
-        pthread_spin_lock(&STARGATE->main_lock);
+        pthread_spin_lock(&CLINTTOOLS->main_lock);
     }
 
     self->song_pool[0] = f_result;
     self->en_song = &self->song_pool[0];
 
     if(a_lock){
-        pthread_spin_unlock(&STARGATE->main_lock);
+        pthread_spin_unlock(&CLINTTOOLS->main_lock);
     }
 
     //if(f_old){

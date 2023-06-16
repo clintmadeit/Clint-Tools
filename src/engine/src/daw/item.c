@@ -1,5 +1,5 @@
 #include "audiodsp/modules/multifx/multifx3knob.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "audio/paifx.h"
 #include "daw.h"
 #include "files.h"
@@ -14,7 +14,7 @@ void g_daw_item_free(t_daw_item * self){
 }
 
 void g_daw_item_get(t_daw* self, int a_uid){
-    SGFLT f_sr = STARGATE->thread_storage[0].sample_rate;
+    SGFLT f_sr = CLINTTOOLS->thread_storage[0].sample_rate;
 
     t_daw_item * f_result;
     lmalloc((void**)&f_result, sizeof(t_daw_item));
@@ -44,7 +44,7 @@ void g_daw_item_get(t_daw* self, int a_uid){
     int f_event_pos = 0;
 
     f_result->audio_items = g_audio_items_get(
-        STARGATE->thread_storage[0].sample_rate
+        CLINTTOOLS->thread_storage[0].sample_rate
     );
 
     while(1)
@@ -92,7 +92,7 @@ void g_daw_item_get(t_daw* self, int a_uid){
             SGFLT sustain = 0.0;
             SGFLT release = 0.0;
             int channel = 0;
-            // TODO: Stargate v2: Remove if statement
+            // TODO: Clint Tools v2: Remove if statement
             if(!f_current_string->eol){
                 v_iterate_2d_char_array(f_current_string);
                 pan = atof(f_current_string->current_str);
@@ -175,7 +175,7 @@ void g_daw_item_get(t_daw* self, int a_uid){
                 f_sr,
                 f_current_string,
                 0,
-                STARGATE->audio_pool,
+                CLINTTOOLS->audio_pool,
                 0
             );
             if(!f_new)  //EOF'd...

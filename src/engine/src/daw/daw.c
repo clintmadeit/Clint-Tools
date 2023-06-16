@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "files.h"
-#include "stargate.h"
+#include "clinttools.h"
 #include "daw.h"
 
 
@@ -67,7 +67,7 @@ t_daw * g_daw_get(SGFLT sr){
     for(f_i = 0; f_i < DN_TRACK_COUNT; ++f_i){
         f_result->track_pool[f_i] = g_track_get(
             f_i,
-            STARGATE->thread_storage[0].sample_rate
+            CLINTTOOLS->thread_storage[0].sample_rate
         );
     }
 
@@ -116,7 +116,7 @@ void v_daw_open_project(int a_first_load){
 #else
         "%s/projects/daw",
 #endif
-        STARGATE->project_folder
+        CLINTTOOLS->project_folder
     );
     sg_path_snprintf(
         DAW->item_folder,
@@ -221,7 +221,7 @@ void v_daw_audio_items_run(
         return;
     }
 
-    int f_playback_mode = STARGATE->playback_mode;
+    int f_playback_mode = CLINTTOOLS->playback_mode;
     t_per_audio_item_fx* f_paif_item;
     t_papifx_controls* papifx_ctl;
 
@@ -541,7 +541,7 @@ void v_daw_run_engine(
     t_sg_seq_event_period * f_seq_period;
     int f_period, sample_count;
     struct SamplePair* output;
-    if(STARGATE->playback_mode != PLAYBACK_MODE_OFF){
+    if(CLINTTOOLS->playback_mode != PLAYBACK_MODE_OFF){
         v_sg_seq_event_list_set(
             &self->en_song->sequences->events,
             &self->seq_event_result,
@@ -575,8 +575,8 @@ void v_daw_run_engine(
         //notify the worker threads to wake up
         int f_i;
         struct SgWorkerThread* _thread;
-        for(f_i = 1; f_i < STARGATE->worker_thread_count; ++f_i){
-            _thread = &STARGATE->worker_threads[f_i];
+        for(f_i = 1; f_i < CLINTTOOLS->worker_thread_count; ++f_i){
+            _thread = &CLINTTOOLS->worker_threads[f_i];
             pthread_spin_lock(&_thread->lock);
             pthread_mutex_lock(&_thread->track_block_mutex);
             pthread_cond_broadcast(&_thread->track_cond);
@@ -586,7 +586,7 @@ void v_daw_run_engine(
         long f_next_current_sample =
             DAW->ts[0].current_sample + sample_count;
 
-        STARGATE->sample_count = sample_count;
+        CLINTTOOLS->sample_count = sample_count;
         self->ts[0].f_next_current_sample = f_next_current_sample;
 
         self->ts[0].current_sample = f_seq_period->period.current_sample;
@@ -598,11 +598,11 @@ void v_daw_run_engine(
         self->ts[0].tempo = f_seq_period->tempo;
         self->ts[0].playback_inc = f_seq_period->playback_inc;
         self->ts[0].is_looping = f_seq_period->is_looping;
-        self->ts[0].playback_mode = STARGATE->playback_mode;
+        self->ts[0].playback_mode = CLINTTOOLS->playback_mode;
         self->ts[0].sample_count = sample_count;
         self->ts[0].input_buffer = a_input_buffers;
 
-        if(STARGATE->playback_mode > 0){
+        if(CLINTTOOLS->playback_mode > 0){
             self->ts[0].ml_sample_period_inc_beats =
                 f_seq_period->period.period_inc_beats;
             self->ts[0].ml_current_beat = f_seq_period->period.start_beat;
@@ -633,10 +633,10 @@ void v_daw_run_engine(
         }
 
         //unleash the hounds
-        for(f_i = 1; f_i < STARGATE->worker_thread_count; ++f_i){
+        for(f_i = 1; f_i < CLINTTOOLS->worker_thread_count; ++f_i){
             t_daw_thread_storage * ts = &DAW->ts[f_i];
             memcpy(ts, &DAW->ts[0], sizeof(t_daw_thread_storage));
-            pthread_spin_unlock(&STARGATE->worker_threads[f_i].lock);
+            pthread_spin_unlock(&CLINTTOOLS->worker_threads[f_i].lock);
         }
 
         v_daw_process(0);  // From the audio thread
@@ -652,15 +652,15 @@ void v_daw_run_engine(
             0,
             0,
             sample_count,
-            STARGATE->playback_mode,
+            CLINTTOOLS->playback_mode,
             &self->ts[0]
         );
         if(
-            STARGATE->playback_mode != PLAYBACK_MODE_OFF 
+            CLINTTOOLS->playback_mode != PLAYBACK_MODE_OFF
             && 
             self->metronome_enabled
             &&
-            !STARGATE->is_offline_rendering
+            !CLINTTOOLS->is_offline_rendering
         ){
             metronome_run(
                 &self->metronome, 
@@ -801,7 +801,7 @@ void daw_set_sequence(t_daw* self, int uid){
     );
     */
 
-    pthread_spin_lock(&STARGATE->main_lock);
+    pthread_spin_lock(&CLINTTOOLS->main_lock);
     self->en_song = &self->song_pool[uid];
-    pthread_spin_unlock(&STARGATE->main_lock);
+    pthread_spin_unlock(&CLINTTOOLS->main_lock);
 }
