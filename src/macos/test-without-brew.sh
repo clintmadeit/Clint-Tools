@@ -5,7 +5,7 @@
 
 brew uninstall -y portaudio portmidi
 
-open -b io.github.stargateaudio
+open -b io.github.clintmadeit
 
 brew install -y portaudio portmidi
 

@@ -61,7 +61,7 @@ def parse_args():
             parser.error(
                 'appimage-start-menu is deprecated, this functionality has '
                 'been replaced by an action in the main menu.  See: '
-                'https://github.com/clinttoolsdaw/clinttools/blob/main/docs/'
+                'https://github.com/clintmadeit/clinttools/blob/main/docs/'
                 'troubleshooting/appimage.md#adding-the-appimage-to-'
                 'the-start-menu'
             )
