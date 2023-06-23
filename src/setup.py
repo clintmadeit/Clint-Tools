@@ -14,8 +14,8 @@ from distutils.core import Extension
 from setuptools.command.test import test as TestCommand
 
 
-NAME = "stargate"
-URL = 'https://github.com/stargateaudio/stargate'
+NAME = "clinttools"
+URL = 'https://github.com/clinttools'
 DESCRIPTION = (
     "Holistic audio production solution"
 )
@@ -102,7 +102,7 @@ def create_c_ext():
     sources = _walk('engine/src', '.c') + _walk('vendor/libcds/src', '.c')
 
     return Extension(
-        name='stargateengine',
+        name='clinttoolsengine',
         sources=sources,
         include_dirs=include_dirs,
         libraries=libraries,
@@ -164,8 +164,8 @@ class PyTest(TestCommand):
 setuptools.setup(
     name=NAME,
     version=VERSION,
-    author="stargateaudio",
-    author_email="stargateaudio@noreply.github.com",
+    author="clintmadet",
+    author_email="clintonbrirdley@gmail.com",
     license="GPLv3",
     description=DESCRIPTION,
     # Only build the C extension if C_EXT=1 was defined in the env. vars.

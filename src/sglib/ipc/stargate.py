@@ -6,12 +6,12 @@ from sglib.lib import util
 from sglib.lib.util import get_wait_file_path, wait_for_finished_file
 from sglib.log import LOG
 
-class StargateIPC(AbstractIPC):
+class clinttoolsIPC(AbstractIPC):
     def __init__(
         self,
         transport,
         with_audio,
-        path="/stargate/main",
+        path="/clinttools/main",
     ):
         AbstractIPC.__init__(
             self,
