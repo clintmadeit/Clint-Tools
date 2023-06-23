@@ -16,6 +16,6 @@ git pull
 
 MINOR=$(jq -r .version.minor src/meta.json)
 cp \
-	src/stargate-${MINOR}-*amd64.deb \
+	src/clinttools-${MINOR}-*amd64.deb \
 	stargate-${MINOR}-1.x86_64.rpm \
-	/mnt/stargatedaw/
+	/mnt/clinttoolsdaw/

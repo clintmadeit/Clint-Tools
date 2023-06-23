@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -B
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -95,7 +95,7 @@ SPEC_DIR = "{}/rpmbuild/SPECS/".format(global_home)
 SOURCE_DIR = "{}/rpmbuild/SOURCES/".format(global_home)
 
 TARBALL_NAME = "{}.tar.gz".format(PACKAGE_NAME)
-TARBALL_URL = ("https://github.com/stargateaudio/stargate/archive"
+TARBALL_URL = ("https://github.com/clinttoolsaudio/clinttools/archive"
     "/{}".format(TARBALL_NAME))
 
 os.system('cp "{}" "{}"'.format(TARBALL_NAME, SOURCE_DIR))
@@ -113,7 +113,7 @@ Release:        1%{{?dist}}
 Summary:        Digital audio workstations, instrument and effect plugins
 
 License:        GPLv3
-URL:            http://github.com/stargateaudio/stargate/
+URL:            http://github.com/clinttoolsaudio/clinttools/
 Source0:        {2}
 
 
@@ -153,7 +153,7 @@ Recommends: \
 %global __python %{{__python3}}
 
 %description
-Stargate is digital audio workstations (DAWs), instrument and effect plugins
+clinttools is digital audio workstations (DAWs), instrument and effect plugins
 
 %prep
 %setup -q
