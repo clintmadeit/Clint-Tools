@@ -195,7 +195,7 @@ setuptools.setup(
         'pytest-runner',
     ],
     scripts=[
-        'scripts/stargate',
+        'scripts/clinttools',
     ],
     # PyPI
     download_url=_github_download_url(),
