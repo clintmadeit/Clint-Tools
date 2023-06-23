@@ -111,12 +111,12 @@ if arch.lower().startswith("arm"):
 depends = ", ".join(depends)
 
 CONTROL_FILE = f"""\
-Package: stargate
+Package: clinttools
 Version: {minor_version}
 Architecture: {arch}
-Maintainer: stargateaudio@noreply.github.com
+Maintainer: clintmadeit@noreply.github.com
 Description: A holistic audio production solution.
-  Stargate is a DAW, instruments, effects and a wave editor.
+  clinttools is a DAW, instruments, effects and a wave editor.
   Everything you need to create music on a computer.
 Build-Depends: {build_depends}
 Depends: {depends}
@@ -126,9 +126,9 @@ Recommends: {recommends}
 postinst = """\
 #!/bin/sh
 
-# Create file association for stargate.project
+# Create file association for clinttools.project
 # update-mime-database /usr/share/mime/  || true
-# xdg-mime default stargate.desktop text/stargate.project || true
+# xdg-mime default clinttools.desktop text/clinttools.project || true
 """
 
 if args.plat_flags is None:
