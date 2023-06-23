@@ -9,7 +9,7 @@ from .project import (
     open_project,
     open_project_dialog,
     set_project,
-    StargateProjectVersionError,
+    clinttoolsProjectVersionError,
 )
 from sgui import shared as glbl_shared
 from sgui.util import ui_scaler_factory
@@ -98,7 +98,7 @@ class Welcome(QtCore.QObject):
             return
         try:
             check_project_version(self.widget, project)
-        except StargateProjectVersionError:
+        except clinttoolsProjectVersionError:
             return
         set_project(project)
         self.close()

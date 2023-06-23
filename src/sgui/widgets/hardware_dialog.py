@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import sys
 import time
 
 NO_MIDI_DEVICES_MSG = """\
-No MIDI devices detected.  If this is not expected, try closing Stargate DAW,
+No MIDI devices detected.  If this is not expected, try closing Clint Tools DAW,
 then unplugging and plugging your MIDI device back in,  Check that you have
 drivers installed if required by your device
 """
@@ -469,7 +469,7 @@ class HardwareDialog:
         f_audio_out_spinbox = QSpinBox()
         f_audio_out_spinbox.setToolTip(
             'The output count, up to the maximum supported by this audio '
-            'device.  Currently, Stargate only supports using 2 outputs as '
+            'device.  Currently, clinttools only supports using 2 outputs as '
             'a stereo pair, this affects which outputs can be selected below'
         )
         f_audio_out_spinbox.setRange(2, 2)
@@ -520,7 +520,7 @@ class HardwareDialog:
                     f_checkbox = QCheckBox(f_midi_device_name)
                     f_checkbox.setToolTip(
                         'Check this box to enable the use of this MIDI device '
-                        'in Stargate DAW'
+                        'in Clint Tools DAW'
                     )
                     if f_midi_device_name in util.MIDI_IN_DEVICES:
                         f_checkbox.setChecked(True)

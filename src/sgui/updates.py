@@ -13,7 +13,7 @@ def ui_check_updates():
     def go_to_releases_page():
         global TIMER
         url = QtCore.QUrl(
-            "https://github.com/stargatedaw/stargate/releases",
+            "https://github.com/clintmadeit/clinttools/releases",
         )
         QDesktopServices.openUrl(url)
         shared.IGNORE_CLOSE_EVENT = False
@@ -32,7 +32,7 @@ def ui_check_updates():
             'Update available!',
             (
                 f'{update[1]} installed, {update[2]} is available.\n'
-                'Close Stargate and go to download page?'
+                'Close clinttools and go to download page?'
             ),
             (
                 QMessageBox.StandardButton.Yes

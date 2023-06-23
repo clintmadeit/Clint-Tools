@@ -1,5 +1,5 @@
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ from sglib.math import clip_value
 from sgui import shared, widgets
 from sgui.daw import shared as daw_shared
 from sgui.widgets.nested_combobox import NestedComboBox
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.models.track_plugin import track_plugin
 from sglib.lib import strings as sg_strings
 from sglib.lib.translate import _

@@ -75,7 +75,7 @@ def new_project(a_parent=None):
 def clone_project(parent):
     try:
         clone, _ = open_project_dialog(parent)
-    except StargateProjectVersionError:
+    except clinttoolsProjectVersionError:
         return False
     if not clone:
         return False
@@ -114,7 +114,7 @@ def open_project(a_parent=None):
         #global_open_project(f_file_str)
         set_project(f_file_str)
         return True
-    except StargateProjectVersionError:
+    except clinttoolsProjectVersionError:
         return False
     except Exception as ex:
         LOG.exception(ex)
@@ -162,9 +162,9 @@ def get_history():
         ]
     return history
 
-class StargateProjectVersionError(Exception):
+class clinttoolsProjectVersionError(Exception):
     """ Raised when the project has been opened in a newer version
-        of Stargate than the version being run
+        of clinttools than the version being run
     """
 
 def check_project_version(parent, project_file):
@@ -180,7 +180,7 @@ def check_project_version(parent, project_file):
         pass
     else:
         msg = _(
-            "Please update to the latest version of Stargate.  "
+            "Please update to the latest version of clinttools.  "
             "This project {} was last edited with version '{}', however, "
             "you are using version '{}'"
         ).format(
@@ -194,5 +194,5 @@ def check_project_version(parent, project_file):
             _("Error"),
             msg,
         )
-        raise StargateProjectVersionError
+        raise clinttoolsProjectVersionError
 

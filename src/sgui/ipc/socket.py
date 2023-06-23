@@ -74,9 +74,9 @@ class SocketIPCServer:
 
     def _handle(self, data: str):
         path, value = data.split("\n", 1)
-        if path == "stargate/daw":
+        if path == "clinttools/daw":
             self.daw_callback(value)
-        elif path == "stargate/wave_edit":
+        elif path == "clinttools/wave_edit":
             self.we_callback(value)
         else:
             LOG.error(f"Received unknown path from engine: {path}")

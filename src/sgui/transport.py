@@ -209,7 +209,7 @@ class TransportWidget:
             None,
             (
                 'Audio engine has been requested to stop immediately.  '
-                'You will need to close and re-open Stargate DAW to '
+                'You will need to close and re-open Clint Tools DAW to '
                 'continue using'
             ),
         )

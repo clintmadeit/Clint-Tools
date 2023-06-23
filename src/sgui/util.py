@@ -176,7 +176,7 @@ class FontManager:
         QMessageBox.warning(
             glbl_shared.MAIN_WINDOW,
             "Info",
-            _("Restart Stargate to update the UI"),
+            _("Restart clinttools to update the UI"),
         )
 
     def choose_font(self):
@@ -192,7 +192,7 @@ class FontManager:
             QMessageBox.warning(
                 glbl_shared.MAIN_WINDOW,
                 "Info",
-                _("Restart Stargate to update the UI"),
+                _("Restart clinttools to update the UI"),
             )
 
     def QGraphicsSimpleTextItem(self, *args, **kwargs):
@@ -267,7 +267,7 @@ def setup_theme(app):
                 f"{ex}\n\n"
                 "Click 'OK' to clear the current theme and quit, 'Cancel' to "
                 "quit without clearing the current theme.\n\n"
-                "You can check ~/stargate/{log,rendered_theme} for details"
+                "You can check ~/clinttools/{log,rendered_theme} for details"
             ),
             buttons=(
                 QMessageBox.StandardButton.Ok

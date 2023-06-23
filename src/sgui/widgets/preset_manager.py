@@ -6,7 +6,7 @@ from sgui.sgqt import *
 import os
 import shutil
 
-PRESET_FILE_DIALOG_STRING = 'Stargate Presets (*.sgp)'
+PRESET_FILE_DIALOG_STRING = 'clinttools Presets (*.sgp)'
 PLUGIN_SETTINGS_CLIPBOARD = {}
 PLUGIN_CONFIGURE_CLIPBOARD = None
 

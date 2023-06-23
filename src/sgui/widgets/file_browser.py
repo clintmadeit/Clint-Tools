@@ -9,7 +9,7 @@ from sgui.sgqt import *
 import os
 import shutil
 
-BM_FILE_DIALOG_STRING = 'Stargate Bookmarks (*.pybm4)'
+BM_FILE_DIALOG_STRING = 'clinttools Bookmarks (*.pybm4)'
 
 FILE_BROWSER_WIDGETS = []
 

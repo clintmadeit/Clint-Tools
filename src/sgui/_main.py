@@ -63,7 +63,7 @@ class MainStackedWidget(QStackedWidget):
             self.addWidget(self.welcome_window.widget)
         self.setCurrentWidget(self.welcome_window.widget)
         self.welcome_window.load_rp()
-        self.setWindowTitle('Stargate DAW')
+        self.setWindowTitle('Clint Tools DAW')
 
     def start(self):
         if self.show_splash():
@@ -132,7 +132,7 @@ class MainStackedWidget(QStackedWidget):
             f_reply = QMessageBox.question(
                 self,
                 _('Message'),
-                _("Are you sure you want to close Stargate DAW?"),
+                _("Are you sure you want to close Clint Tools DAW?"),
                 (
                     QMessageBox.StandardButton.Yes
                     |
@@ -202,7 +202,7 @@ def main(args):
     pid = check_pidfile(UI_PIDFILE)
     if pid is not None:
         msg = (
-            f"Detected Stargate is already running with pid {pid}, "
+            f"Detected clinttools is already running with pid {pid}, "
             "please close the other instance first"
         )
         QMessageBox.warning(None, "Error", msg)

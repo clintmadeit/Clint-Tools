@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@ GNU General Public License for more details.
 """
 from . import shared
 from .updates import ui_check_updates
-from sglib.models import stargate as sg_project
+from sglib.models import clinttools as sg_project
 from sglib.models import theme
 from sglib.ipc import *
 from sglib.lib import util
@@ -42,7 +42,7 @@ from sgui.project import (
     new_project,
     open_project,
     set_project,
-    StargateProjectVersionError,
+    clinttoolsProjectVersionError,
 )
 from sgui.util import (
     check_for_empty_directory,
@@ -85,12 +85,12 @@ def handle_engine_error(exit_code):
     if exit_code == 1003:
         msg = (
             "The audio device was busy, make sure that no other applications "
-            "are using the device and try restarting Stargate"
+            "are using the device and try restarting clinttools"
         )
     else:
         msg = (
             f"The audio engine stopped with exit code {exit_code}, "
-             "please try restarting Stargate"
+             "please try restarting clinttools"
         )
         shared.TRANSPORT.stop_button.setChecked(True)
 
@@ -134,7 +134,7 @@ class SgMainWindow(QWidget):
         shared.MAIN_WINDOW = self
         constants.IPC_TRANSPORT = SocketIPCTransport()
         with_audio = constants.IPC_TRANSPORT is not None
-        constants.IPC = StargateIPC(
+        constants.IPC = clinttoolsIPC(
             constants.IPC_TRANSPORT,
             with_audio,
         )
@@ -302,7 +302,7 @@ class SgMainWindow(QWidget):
 
         self.quit_action = QAction("Quit", self.menu_file)
         self.menu_file.addAction(self.quit_action)
-        self.quit_action.setToolTip('Close Stargate DAW')
+        self.quit_action.setToolTip('Close Clint Tools DAW')
         self.quit_action.triggered.connect(shared.MAIN_STACKED_WIDGET.close)
         self.quit_action.setShortcut(QKeySequence.StandardKey.Quit)
 
@@ -354,7 +354,7 @@ class SgMainWindow(QWidget):
         self.open_theme_action = QAction("Open Theme...", self.menu_appearance)
         self.menu_appearance.addAction(self.open_theme_action)
         self.open_theme_action.setToolTip(
-            'Open a new sgtheme file to change the appearance of Stargate.  '
+            'Open a new sgtheme file to change the appearance of clinttools.  '
             'There are several factory themes, or create your own'
         )
         self.open_theme_action.triggered.connect(self.on_open_theme)
@@ -390,7 +390,7 @@ class SgMainWindow(QWidget):
         )
         self.menu_appearance.addAction(self.custom_font_action)
         self.custom_font_action.setToolTip(
-            'Choose a custom font for Stargate'
+            'Choose a custom font for clinttools'
         )
         self.custom_font_action.triggered.connect(self.on_custom_font)
 
@@ -400,7 +400,7 @@ class SgMainWindow(QWidget):
         )
         self.menu_appearance.addAction(self.clear_custom_font_action)
         self.clear_custom_font_action.setToolTip(
-            'Use the default font included with Stargate'
+            'Use the default font included with clinttools'
         )
         self.clear_custom_font_action.triggered.connect(
             self.on_clear_custom_font,
@@ -430,7 +430,7 @@ class SgMainWindow(QWidget):
         )
         self.sfzinstruments_action.triggered.connect(self.on_sfzinstruments)
         self.samplepack_action = self.menu_help.addAction(
-            _("Download the official Stargate DAW sample pack"),
+            _("Download the official Clint Tools DAW sample pack"),
         )
         self.samplepack_action.triggered.connect(self.on_samplepack)
 
@@ -462,7 +462,7 @@ class SgMainWindow(QWidget):
         self.menu_bar.addAction(self.check_updates_action)
         self.check_updates_action.setToolTip(
             'Check to see if you are running the latest version of '
-            'Stargate DAW'
+            'Clint Tools DAW'
         )
         self.check_updates_action.triggered.connect(ui_check_updates)
 
@@ -495,7 +495,7 @@ class SgMainWindow(QWidget):
                 self.menu_bar,
             )
             self.appimage_uninstall_action.setToolTip(
-                'Uninstall Stargate DAW AppImage from the start menu.  '
+                'Uninstall Clint Tools DAW AppImage from the start menu.  '
                 'This will not uninstall a start menu shortcut installed '
                 'by other packages'
             )
@@ -628,7 +628,7 @@ class SgMainWindow(QWidget):
 
     def on_samplepack(self):
         url = QtCore.QUrl(
-            "https://github.com/stargatedaw/stargate-sample-pack",
+            "https://github.com/clintmadeit/clinttools-sample-pack",
         )
         QDesktopServices.openUrl(url)
 
@@ -895,7 +895,7 @@ class SgMainWindow(QWidget):
         except Exception as ex:
             LOG.error(
                 "Exception thrown while attempting to exit, "
-                "forcing Stargate to exit"
+                "forcing clinttools to exit"
             )
             LOG.exception(ex)
             exit(999)
@@ -912,7 +912,7 @@ class SgMainWindow(QWidget):
         QMessageBox.warning(
             MAIN_WINDOW,
             _("Theme Applied..."),
-            _("Changed theme.  Please restart Stargate DAW")
+            _("Changed theme.  Please restart clinttools DAW")
         )
 
     def on_copy_theme(self):
@@ -944,7 +944,7 @@ class SgMainWindow(QWidget):
                 MAIN_WINDOW,
                 _("Open a theme file"),
                 util.THEMES_DIR,
-                "Stargate Theme (*.sgtheme)",
+                "clinttools Theme (*.sgtheme)",
                 options=QFileDialog.Option.DontUseNativeDialog,
             )
             if f_file and str(f_file):
@@ -962,7 +962,7 @@ class SgMainWindow(QWidget):
                 QMessageBox.warning(
                     MAIN_WINDOW,
                     _("Theme Applied..."),
-                    _("Changed theme.  Please restart Stargate DAW")
+                    _("Changed theme.  Please restart Clint Tools DAW")
                 )
         except Exception as ex:
             show_generic_exception(ex)
@@ -1433,7 +1433,7 @@ def _load_project(project_file):
             _("Error"),
             _(
                 "You do not have read+write permissions to {}, please correct "
-                "this and restart Stargate"
+                "this and restart clinttools"
             ).format(
                 os.path.dirname(project_file),
             ),
@@ -1450,7 +1450,7 @@ def _load_project(project_file):
                 project_file,
             )
             global_open_project(project_file)
-        except StargateProjectVersionError:
+        except clinttoolsProjectVersionError:
             exit(1)
         except Exception as ex:
             LOG.exception(ex)
@@ -1509,7 +1509,7 @@ def main(
             _("Error"),
             _(
                 "You do not have read+write permissions to {}, please correct "
-                "this and restart Stargate"
+                "this and restart clinttools"
             ).format(HOME),
         )
         MAIN_WINDOW.prepare_to_quit()

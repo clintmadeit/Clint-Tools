@@ -18,7 +18,7 @@ from sglib.math import clip_value
 from sglib.models.project.abstract import AbstractProject
 from sglib.models.theme import get_asset_path
 from sglib.models.track_plugin import track_plugin, track_plugins
-from sglib.models.stargate import AudioInputTrack, AudioInputTracks
+from sglib.models.clinttools import AudioInputTrack, AudioInputTracks
 from sgui import shared as glbl_shared
 from sgui.util import show_generic_exception
 from sgui.widgets.transport import AbstractTransportWidget
@@ -832,7 +832,7 @@ class WaveEditorWidget:
         self.bookmark_action.setToolTip(
             'Bookmark this file in the project.  This will add the file to '
             'the Bookmarks button menu, so that it can be quickly opened '
-            'again later, even after closing and reopening Stargate DAW'
+            'again later, even after closing and reopening Clint Tools DAW'
         )
         self.bookmark_action.triggered.connect(self.bookmark_file)
         self.bookmark_action.setShortcut(

@@ -1,5 +1,5 @@
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the clinttools project, Copyright clinttools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -143,7 +143,7 @@ def project_recover_dialog(a_file):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Stargate project recover script",
+        description="clinttools project recover script",
     )
     parser.add_argument(
         '-p',

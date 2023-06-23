@@ -279,7 +279,7 @@ class TimePitchDialogWidget:
             self.hide_controls(pitch=True, _time=True, end=True)
             self.crispness_combobox.setCurrentIndex(5)
         elif a_val == 6:  # Paulstretch
-            # TODO Stargate v2: Deprecate pitch completely for Paulstretch
+            # TODO clinttools v2: Deprecate pitch completely for Paulstretch
             self.hide_controls(pitch=self.ps_pitch, _time=True)
             self.timestretch_amt_end_checkbox.setChecked(False)
             self.pitch_shift_end_checkbox.setChecked(False)

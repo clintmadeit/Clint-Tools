@@ -110,6 +110,6 @@ def set_window_title():
     if util.IS_WINDOWS:
         dirname = dirname.replace('/', '\\')
     MAIN_STACKED_WIDGET.setWindowTitle(
-        f'Stargate DAW - {dirname}'
+        f'Clint Tools DAW - {dirname}'
     )
 

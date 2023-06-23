@@ -1,6 +1,6 @@
 from sglib.models.cc_mapping import CCMapping
 from sglib.models.plugin_file import plugin_file
-from sglib.models.stargate import folder_plugins
+from sglib.models.clinttools import folder_plugins
 from sglib.lib.translate import _
 from sglib.log import LOG
 from sgui import shared as glbl_shared
