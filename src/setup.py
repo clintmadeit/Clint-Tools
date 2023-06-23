@@ -164,7 +164,7 @@ class PyTest(TestCommand):
 setuptools.setup(
     name=NAME,
     version=VERSION,
-    author="clintmadet",
+    author="clintmadeit",
     author_email="clintonbrirdley@gmail.com",
     license="GPLv3",
     description=DESCRIPTION,
