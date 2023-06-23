@@ -15,7 +15,7 @@ from setuptools.command.test import test as TestCommand
 
 
 NAME = "clinttools"
-URL = 'https://github.com/clinttools'
+URL = 'https://github.com/clintmadeit/clinttools'
 DESCRIPTION = (
     "Holistic audio production solution"
 )
