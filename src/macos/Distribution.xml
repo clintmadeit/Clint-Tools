@@ -4,7 +4,7 @@
     <allowed-os-versions>
         <os-version min="10.10"/>
     </allowed-os-versions>
-    <pkg-ref id="com.github.clinttoolsdaw.clinttools"/>
+    <pkg-ref id="com.github.clintmadeit.clinttools"/>
     <options 
         customize="never" 
         require-scripts="false" 
@@ -12,15 +12,15 @@
     />
     <choices-outline>
         <line choice="default">
-            <line choice="com.github.clinttoolsdaw.clinttools"/>
+            <line choice="com.github.clintmadeit.clinttools"/>
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="com.github.clinttoolsdaw.clinttools" visible="false">
-        <pkg-ref id="com.github.clinttoolsdaw.clinttools"/>
+    <choice id="com.github.clintmadeit.clinttools" visible="false">
+        <pkg-ref id="com.github.clintmadeit.clinttools"/>
     </choice>
     <pkg-ref 
-        id="com.github.clinttoolsdaw.clinttools"
+        id="com.github.clintmadeit.clinttools"
         version="0" 
         onConclusion="none"
     >Distribution.pkg</pkg-ref>

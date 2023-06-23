@@ -2,12 +2,12 @@
 
 # The launch daemon is deprecated, we only ensure that it is uninstalled
 # and unloaded.  TODO: Remove in mid-2023
-SG_LAUNCH_DAEMON="/Library/LaunchDaemons/com.github.stargatedaw.stargate.launchdaemon.plist"
+SG_LAUNCH_DAEMON="/Library/LaunchDaemons/com.github.clintmadeit.clinttools.launchdaemon.plist"
 /bin/launchctl unload "${SG_LAUNCH_DAEMON}" || true
 rm -f "${SG_LAUNCH_DAEMON}" || true
 
 # Deprecated DMG install.  TODO: Remove in mid-2023
-if [ -d "/Applications/stargate.app" ]; then
-	echo "Deleting previous DMG install of Stargate DAW"
-	rm -rf /Applications/stargate.app
+if [ -d "/Applications/clinttools.app" ]; then
+	echo "Deleting previous DMG install of Clint Tools DAW"
+	rm -rf /Applications/clinttools.app
 fi
