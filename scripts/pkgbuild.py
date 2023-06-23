@@ -25,7 +25,7 @@ pkgver={{ version }}
 pkgrel=1
 pkgdesc="A DAW, plugins and wave editor"
 arch=('i686' 'x86_64' 'aarch64')
-url="https://github.com/stargatedaw/stargate"
+url="https://github.com/clintmadeit/clinttools"
 license=('GPL')
 groups=()
 depends=(
@@ -95,7 +95,7 @@ orig_wd = os.path.abspath(
 os.chdir(orig_wd)
 # Delete folders that the Arch package utils create, which cause the size of
 # the tar files to grow
-os.system('rm -rf src/stargate-[0-9][0-9].*')
+os.system('rm -rf src/clinttools-[0-9][0-9].*')
 
 with open("src/meta.json") as f:
     j = json.load(f)
