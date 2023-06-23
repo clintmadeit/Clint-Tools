@@ -115,7 +115,7 @@ Package: clinttools
 Version: {minor_version}
 Architecture: {arch}
 Maintainer: clintmadeit@noreply.github.com
-Description: A holistic audio production solution.
+Description: Made for Africa by Africa.
   clinttools is a DAW, instruments, effects and a wave editor.
   Everything you need to create music on a computer.
 Build-Depends: {build_depends}
