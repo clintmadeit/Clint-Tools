@@ -30,14 +30,14 @@ Known issues:
   receive audio from them.  Recommend reducing input count to something much
   smaller, unless you actually intend to use them
 - Sometimes causes constants 100% CPU on one core.  To confirm that this is
-  pipewire and not Stargate, ensure that you are running Stargate 22.12.5 or
-  later and run `ps -o pid,pcpu,comm -L  $(pgrep stargate-engine)` while you
+  pipewire and not Clint Tools, ensure that you are running Clint Tools 22.12.5 or
+  later and run `ps -o pid,pcpu,comm -L  $(pgrep clinttools-engine)` while you
   are having this issue.  If the thread with high CPU is simply called
-  'stargate-engine' and not a proper thread name like `Worker 1` or
+  'clinttools-engine' and not a proper thread name like `Worker 1` or
   `UI Monitor`, then it is very likely to be pipewire.
 
 ## Wayland
-Stargate DAW has had a tremendous amount of work put into it to remove the
+Clint Tools DAW has had a tremendous amount of work put into it to remove the
 window manager from the equation (the single window unification), and by
 extension mitigate Wayland problems to the greatest extent possible.  However,
 at the time of this writing, Wayland still has stability issues on every
@@ -83,7 +83,7 @@ to get all of the recommended dependency packages.
 Note that the `rpm` command is not a viable way to install packages, as it
 cannot install dependencies.  Most distros use `dnf`:
 ```
-sudo dnf install /path/to/stargate-*.rpm
+sudo dnf install /path/to/clinttools-*.rpm
 ```
 
 ## CentOS 8, including Stream

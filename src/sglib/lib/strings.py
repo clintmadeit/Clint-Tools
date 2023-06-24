@@ -1,5 +1,5 @@
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -116,8 +116,8 @@ Select 1+ items, CTRL+SHIFT+Click and drag up/down:
 See the menu button above for additional actions"""
 
 multiple_instances_warning = _("""\
-Detected that there are instances of the Stargate audio engine already running.
-This could mean that you already have Stargate running, if so you
+Detected that there are instances of the Clint Tools audio engine already running.
+This could mean that you already have Clint Tools running, if so you
 should click 'Cancel' and close the other instance.
 
 This could also mean that for some reason the engine did not properly

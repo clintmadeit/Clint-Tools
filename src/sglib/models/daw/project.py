@@ -8,11 +8,11 @@ from sglib import constants
 from sglib.math import clip_min, clip_value
 from sglib.models.daw.playlist import Playlist
 from sglib.models.daw.routing import MIDIRoutes, RoutingGraph
-from sglib.models.stargate import AudioInputTracks
+from sglib.models.clinttools import AudioInputTracks
 from sglib import constants
 from sglib.models.project.abstract import AbstractProject
 from sglib.models.track_plugin import track_plugin, track_plugins
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib import history
 from sglib.lib import util
 from sglib.lib.util import *
@@ -64,7 +64,7 @@ class DawProject(AbstractProject):
         """ Make modifications to the project folder format as needed, to
             bring old projects up to date on format changes
         """
-        # TODO Stargate v2: Remove all existing quirks
+        # TODO Clint Tools v2: Remove all existing quirks
         self._quirk_per_song_automation()
 
     def _quirk_per_song_automation(self):

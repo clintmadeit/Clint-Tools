@@ -52,7 +52,7 @@ def show(current_item):
 
     f_wave_editor_action = QAction(_("Open in Wave Editor"), f_file_menu)
     f_wave_editor_action.setToolTip(
-        'Open this audio file in the Stargate built-in Wave Editor'
+        'Open this audio file in the Clint Tools built-in Wave Editor'
     )
     f_file_menu.addAction(f_wave_editor_action)
     f_wave_editor_action.triggered.connect(open_in_wave_editor)

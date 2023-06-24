@@ -701,7 +701,7 @@ def setup_globals():
 
     THEME_FILE = get_file_setting("default-style", str, None)
     if THEME_FILE:
-        # The Windows install prefix changes everytime Stargate is launched,
+        # The Windows install prefix changes everytime Clint Tools is launched,
         # so substitute it every time the file is saved or loaded
         THEME_FILE = THEME_FILE.replace(
             _THEMES_DIR_SUB,
@@ -782,7 +782,7 @@ def set_theme(
     # Test that the theme parses before accepting it.
     # Will raise an exception if malformed data, you must use try/except
     open_theme(path, scaler, font_size, font_unit)
-    # The Windows install prefix changes everytime Stargate is launched,
+    # The Windows install prefix changes everytime Clint Tools is launched,
     # so substitute it every time the file is saved or loaded
     path = path.replace(
         pi_path(THEMES_DIR),

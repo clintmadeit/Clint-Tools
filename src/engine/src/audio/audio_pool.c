@@ -307,7 +307,7 @@ t_audio_pool_item * v_audio_pool_add_item(
                 a_audio_pool->samples_folder,
                 a_file_path
             );
-	    // TODO Stargate v2: Delete this quirk for the 
+	    // TODO Clint Tools v2: Delete this quirk for the 
 	    // audio_pool corruption bug
 #if SG_OS == _OS_WINDOWS
 	    if(a_file_path[1] == L':' && !i_file_exists(f_path)){

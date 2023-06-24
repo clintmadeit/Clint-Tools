@@ -9,5 +9,5 @@ appimage-builder-cache/
 COMMIT
 dist/
 htmlcov/
-stargate.egg-info/
+clinttools.egg-info/
 ./tmp/

@@ -8,9 +8,9 @@ from .util import META_DOT_JSON
 
 
 def check_for_updates(
-    url='https://api.github.com/repos/stargatedaw/stargate/releases/latest',
+    url='https://api.github.com/repos/stargatedaw/clinttools/releases/latest',
 ) -> Tuple[bool, str, str]:
-    """ Check for newer versions of Stargate DAW than what is running
+    """ Check for newer versions of Clint Tools DAW than what is running
 
         @return: The update name if newer is available, else None
     """

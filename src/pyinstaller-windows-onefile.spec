@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['scripts\\clinttools'],
-             pathex=['C:\\msys64\\home\\starg\\src\\clinttools\\src'],
+             pathex=['C:\\msys64\\home\\clint\\src\\clinttools\\src'],
              binaries=[
                  ('engine/*.exe', 'engine'),
                  ('engine/*.pdb', 'engine'),

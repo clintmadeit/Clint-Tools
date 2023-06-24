@@ -1,5 +1,5 @@
 # Plugin Racks
-The plugin racks host all of your instrument and effect plugins.  Stargate
+The plugin racks host all of your instrument and effect plugins.  Clint Tools
 uses it's own high quality, CPU efficient plugins, in it's own plugin format.
 This allows us to create a DAW that works on every operating system and CPU
 architecture, with portable project files that can be shared for easy

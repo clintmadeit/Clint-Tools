@@ -1,5 +1,5 @@
 from sglib.log import LOG
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib.util import *
 from sglib.lib.midi import load_midi_file
 from sglib.models.daw import _shared

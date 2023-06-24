@@ -6,7 +6,7 @@ class WaveEditIPC(AbstractIPC):
         self,
         transport,
         a_with_audio=False,
-        a_configure_path="/stargate/wave_edit",
+        a_configure_path="/clinttools/wave_edit",
     ):
         AbstractIPC.__init__(
             self,

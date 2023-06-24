@@ -22,7 +22,7 @@ git submodule update
 ## Linux
 ### Option 1: Packaging scripts
 ```
-# From the root of the Stargate repo
+# From the root of the Clint Tools repo
 # See --help for additional options
 # Create a Debian package, works on Debian, Ubuntu and their derivatives
 scripts/deb.py
@@ -40,7 +40,7 @@ make
 # Install
 PREFIX=/usr/local make install
 # Or, run locally without installing
-./scripts/stargate
+./scripts/clinttools
 ```
 
 # Distro Packagers
@@ -87,13 +87,13 @@ make distro
 # Install without vendored dependencies
 make install_distro
 
-# Install everything into a single folder, in this example /opt/stargate
-PREFIX=/opt/stargate make install_self_contained
+# Install everything into a single folder, in this example /opt/clinttools
+PREFIX=/opt/clinttools make install_self_contained
 # You can then:
-ln -s /opt/stargate/scripts/stargate /usr/bin/stargate
-ln -s /opt/stargate/files/share/doc/stargate /usr/share/doc/stargate
-ln -s /opt/stargate/files/share/pixmaps/stargate.png /usr/share/pixmaps/stargate.png
-ln -s /opt/stargate/files/share/pixmaps/stargate.ico /usr/share/pixmaps/stargate.ico
-ln -s /opt/stargate/files/share/applications/stargate.desktop /usr/share/applications/stargate.desktop
-ln -s /opt/stargate/files/share/mime/packages/stargate.xml /usr/share/mime/packages/stargate.xml
+ln -s /opt/clinttools/scripts/clinttools /usr/bin/clinttools
+ln -s /opt/clinttools/files/share/doc/clinttools /usr/share/doc/clinttools
+ln -s /opt/clinttools/files/share/pixmaps/clinttools.png /usr/share/pixmaps/clinttools.png
+ln -s /opt/clinttools/files/share/pixmaps/clinttools.ico /usr/share/pixmaps/clinttools.ico
+ln -s /opt/clinttools/files/share/applications/clinttools.desktop /usr/share/applications/clinttools.desktop
+ln -s /opt/clinttools/files/share/mime/packages/clinttools.xml /usr/share/mime/packages/clinttools.xml
 ```

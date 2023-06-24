@@ -1,5 +1,5 @@
 from sglib import constants
-from sglib.models.stargate.audio_pool import *
+from sglib.models.clinttools.audio_pool import *
 import copy
 
 POOL_STR = """\

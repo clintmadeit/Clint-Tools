@@ -8,7 +8,7 @@ from sgui.daw import shared
 from sglib import constants
 from sglib.models.daw import *
 from sgui.daw.shared import *
-from sglib.models import stargate as sg_project, theme
+from sglib.models import clinttools as sg_project, theme
 from sglib.lib import util
 from sglib.lib.util import *
 from sglib.lib.translate import _

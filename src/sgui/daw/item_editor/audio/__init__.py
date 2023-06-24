@@ -21,7 +21,7 @@ from sglib.log import LOG
 from sglib.math import linear_interpolate
 from sgui.sgqt import *
 from sglib.models import theme
-from sglib.models.stargate.audio_pool import PerFileFX
+from sglib.models.clinttools.audio_pool import PerFileFX
 from sglib.models.theme import get_asset_path
 from sgui.util import get_font
 

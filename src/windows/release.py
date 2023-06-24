@@ -27,7 +27,7 @@ subprocess.check_call(["pyinstaller", "pyinstaller-windows-onedir.spec"])
 TEMPLATE = r"""
 !define PRODUCT_NAME "clinttools"
 !define PRODUCT_VERSION "{MAJOR_VERSION_NUM}.0"
-!define PRODUCT_PUBLISHER "clinttoolsdaw"
+!define PRODUCT_PUBLISHER "clintmadeit"
 
 ;Require admin rights on NT6+ (When UAC is turned on)
 RequestExecutionLevel admin
@@ -35,8 +35,8 @@ RequestExecutionLevel admin
 SetCompressor /SOLID lzma
 
 Name "Clint Tools DAW {MINOR_VERSION}"
-OutFile "dist\clinttoolsDAW-{MINOR_VERSION}-win64-installer.exe"
-InstallDir "$PROGRAMFILES64\clinttoolsdaw@github\Clint-Tools"
+OutFile "dist\clintmadeit-{MINOR_VERSION}-win64-installer.exe"
+InstallDir "$PROGRAMFILES64\clintmadeit@github\Clint-Tools"
 
 ;--------------------------------
 ;Interface Settings
@@ -119,11 +119,11 @@ Section "Base Install" SEC01
     File /r "dist\clinttools\"
     File "files\share\pixmaps\{MAJOR_VERSION}.ico"
     ; Add to the "Add or remove programs" dialog
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clintmadeit" \
                 "DisplayName" "Clint Tools DAW"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clintmadeit" \
                 "DisplayIcon" "$\"$INSTDIR\program\files\share\pixmaps\clinttools.ico$\""
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW" \
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clintmadeit" \
                 "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
 SectionEnd
 
@@ -159,7 +159,7 @@ Section "uninstall"
     ; stored next to the application, only the application itself
     RMDir /r $INSTDIR\program
     Delete "$SMPROGRAMS\Clint Tools DAW.lnk"
-    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clinttoolsDAW"
+    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\clintmadeit"
 SectionEnd
 """
 

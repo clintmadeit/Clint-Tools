@@ -9,7 +9,7 @@ from sgui.sgqt import *
 from sglib.lib import util
 from sglib.lib.strings import NO_AUDIO_INPUTS_INSTRUCTIONS
 from sglib.lib.translate import _
-from sglib.models.stargate import AudioInputTrack, AudioInputTracks
+from sglib.models.clinttools import AudioInputTrack, AudioInputTracks
 from sgui.daw import shared
 
 

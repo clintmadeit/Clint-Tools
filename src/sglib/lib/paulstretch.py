@@ -3,9 +3,9 @@
 # Paul's Extreme Sound Stretch (Paulstretch) - Python version
 # originally by Nasca Octavian PAUL, Targu Mures, Romania
 #
-# Forked to allow better integration with Stargate
+# Forked to allow better integration with Clint Tools
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,8 +29,8 @@ lib_dir = os.path.abspath(
     os.path.join(
         f_parent_dir,
         'share',
-        'stargate',
-        'stargate',
+        'clinttools',
+        'clinttools',
     ),
 )
 sys.path.insert(0, f_parent_dir)

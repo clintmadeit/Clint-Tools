@@ -1,6 +1,6 @@
 from .atm_point import DawAtmPoint
 from sglib.math import cosine_interpolate, linear_interpolate
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib.util import *
 from sglib.lib.translate import _
 

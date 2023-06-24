@@ -27,7 +27,7 @@ void v_append_to_file(SGPATHSTR * a_file, char * a_string);
 t_dir_list* g_get_dir_list(char * a_dir);
 void delete_file(SGPATHSTR* path);
 
-// Retrieve a config setting from ~/stargate/config/
+// Retrieve a config setting from ~/clinttools/config/
 void get_file_setting(
     char * a_dest,
     SGPATHSTR * a_name,

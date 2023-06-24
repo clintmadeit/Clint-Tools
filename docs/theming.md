@@ -125,6 +125,6 @@ in a single place for both QSS and non-QSS themed components.
 
 # Debugging
 Upon loading the theme, a copy of the fully rendered theme is saved to
-`~/stargate/rendered_theme/`.  This copy of the theme cannot be edited
-directly to change the appearance of Stargate, it is only for debugging
+`~/clinttools/rendered_theme/`.  This copy of the theme cannot be edited
+directly to change the appearance of Clint Tools, it is only for debugging
 purposes.

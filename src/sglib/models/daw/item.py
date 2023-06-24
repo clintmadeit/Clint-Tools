@@ -1,4 +1,4 @@
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib.util import *
 
 from . import _shared

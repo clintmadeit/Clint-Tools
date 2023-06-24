@@ -1,5 +1,5 @@
 from . import _shared
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib.util import *
 from sglib.lib.translate import _
 

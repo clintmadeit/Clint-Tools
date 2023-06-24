@@ -1,11 +1,11 @@
 # Description
-This document describes how to use Stargate DAW as a benchmark for highly
+This document describes how to use Clint Tools DAW as a benchmark for highly
 optimized, multithreaded audio DSP code written in C.  Specifically, this
 procedure is for Linux, it would be possible on Windows, but not trivially
 easy to do from the installed artifacts in the Windows installer.
 
 # Overview
-The Stargate UI is a PyQt5/6 application that controls the engine subprocess
+The Clint Tools UI is a PyQt5/6 application that controls the engine subprocess
 that is written in C, by invoking the engine CLI and communicating over UDP
 sockets on localhost.
 
@@ -56,7 +56,7 @@ include empty space at either end, as it may skew the results.
 * Click the `Copy cmd args` button, and close the dialog
 * Close Clint_Tools DAW
 * Open a terminal
-* Type in the `Clint_Tools-engine` binary you want to use, ie: ./stargate-engine,
+* Type in the `Clint_Tools-engine` binary you want to use, ie: ./clinttools-engine,
   /usr/bin/Clint_Tools-engine, etc...
 * Paste the command arguments you copied from the render dialog
 
@@ -69,7 +69,7 @@ You should have with something like this in your terminal window:
 
 ```shell
 # Sample rate.  Normally this is 44100 or 48000, but users sometimes choose
-# 96000 or 192000 for higher quality, at a much higher CPU cost.  Stargate DAW
+# 96000 or 192000 for higher quality, at a much higher CPU cost.  Clint Tools DAW
 # has been tested at rates over 1,000,000, although such rates adversely affect
 # the audio by drastically changing the mix characteristics
 SR=44100
@@ -81,18 +81,18 @@ SR=44100
 # calculated as (BUF_SIZE / SR) * 1000 == latency in milliseconds
 BUF_SIZE=512
 # The number of worker threads to spawn.  The limit is 16, setting to zero
-# causes Stargate DAW to automatically select a very conservative value
+# causes Clint Tools DAW to automatically select a very conservative value
 # of 1-4 depending on the CPU that was detected
 THREADS=8
 # The project folder to render.  Specifically, this is the folder that contains
-# the `stargate.project` file.
+# the `clinttools.project` file.
 PROJECT=~/Clint-Tools/projects/myproject
 # The file to output.  If you want to keep all of the artifacts from this run,
 # change the filename between runs
 OUTFILE=test.wav
 # This is the musical "beat" number within the project to begin rendering at.
 # 0 being the first beat of the song.  It is best to get this by opening
-# the project in Stargate DAW as described above, but you could also use
+# the project in Clint Tools DAW as described above, but you could also use
 # arbitrary numbers.  This should be a low number, like 0 or 8
 START=8
 # This is the musical "beat" number within the project to stop rendering at
@@ -103,7 +103,7 @@ END=340
 ```
 
 The `OUTFILE` parameter will exist as a file after the render.  Note that the
-file may be deterministic within the same version of Stargate DAW, but floating
+file may be deterministic within the same version of Clint Tools DAW, but floating
 point rounding error may cause it to be non-deterministic.  You can listen to
 the file to check for correctness, but checksums may (or may not) work as
 intended.
@@ -130,9 +130,9 @@ this is how long it would play.
 Song length: 155.643356 seconds
 ```
 
-This is the rate that Stargate DAW can render.  For example 1:1 means that it
+This is the rate that Clint Tools DAW can render.  For example 1:1 means that it
 can keep up with real time, no faster or slower.  For example, a 120 second
-song rendered in 120 seconds.  3: 1 means that Stargate DAW can output 3
+song rendered in 120 seconds.  3: 1 means that Clint Tools DAW can output 3
 seconds of the song in 1 second (on average, for the entire song).  Less than
 1:1 means the system is too slow to play the project back in real time.
 ```
@@ -141,14 +141,14 @@ Ratio, render time to real time (higher is better):  5.527439 : 1
 
 # Examples
 This is a benchmark of my current system, a Ryzen 5950x with 16 cores, using
-a development build shortly after the Stargate DAW 21.10.8 release.
+a development build shortly after the Clint Tools DAW 21.10.8 release.
 
 The project is an unrealistically heavy project designed to scale well that you
 can [download here](./benchmark-project.zip).  It consists of 31 instances of
 the FM1 synthesizer running the unison-heavy `Festivus` patch, playing a chord
 heavy MIDI item.  Nobody would realistically run such a heavy project, as such
-you should not try to open the project and play it back in Stargate DAW unless
-you have a CPU with many cores AND you have configured Stargate DAW to use at
+you should not try to open the project and play it back in Clint Tools DAW unless
+you have a CPU with many cores AND you have configured Clint Tools DAW to use at
 least 8 cores in the `Hardware Settings` dialog on the welcome screen.
 However, you can offline render it on any hardware, even a Raspberry Pi 4 or an
 ancient laptop.
@@ -182,7 +182,7 @@ Ratio, render time to real time (higher is better):  0.864748 : 1
 ```
 
 Note that with 2 threads, we entered the point where the ratio fell below 1:1,
-therefore there is no way this project could be played in real time in Stargate
+therefore there is no way this project could be played in real time in Clint Tools
 DAW on 2 CPU cores.  However, given that this project is completely,
 unrealistically CPU heavy (many times more so than a normal song), this is a
 testament to how CPU efficient the code is that such a heavy project can almost

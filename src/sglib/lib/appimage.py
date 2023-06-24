@@ -17,7 +17,7 @@ def appimage_start_menu_path():
         'share',
         'applications',
     )
-    desktop_path = os.path.join(desktop_dir, 'stargate.desktop')
+    desktop_path = os.path.join(desktop_dir, 'clinttools.desktop')
     return desktop_dir, desktop_path
 
 def appimage_start_menu_install():
@@ -30,9 +30,9 @@ def appimage_start_menu_install():
         'python3.10',
         'share',
         'pixmaps',
-        'stargate.png',
+        'clinttools.png',
     )
-    icon_copy = os.path.join(parent, 'stargate.png')
+    icon_copy = os.path.join(parent, 'clinttools.png')
     shutil.copy(icon, icon_copy)
     desktop_dir, desktop_path = appimage_start_menu_path()
     os.makedirs(desktop_dir, exist_ok=True)

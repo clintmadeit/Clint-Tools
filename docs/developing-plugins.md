@@ -34,7 +34,7 @@ Discuss the UI in detail, a mock-up of the proposed UI would be excellent.
 
 # Engine
 Discuss how the DSP code will be implemented.  Will it require libraries that
-stargate-engine does not already depend on?
+clinttools-engine does not already depend on?
 
 # Resource Consumption
 Will the UI involve complex 2d or 3d rendering?  Would CPU usage be considered
@@ -66,7 +66,7 @@ compatibility.
 
 ## Backwards Compatibility
 Backwards compatibility must be maintained within the same MAJOR release
-(stargate, stargate2, stargate3).  Major releases may break compatibility
+(clinttools, stargate2, stargate3).  Major releases may break compatibility
 as needed, as stargate3 is not expected to open stargate2 projects, etc...
 
 - You must not break compatibility with existing project file formats.  In
@@ -104,4 +104,4 @@ as needed, as stargate3 is not expected to open stargate2 projects, etc...
   library to the greatest extent possible, and add new DSP routines to the
   library.
 - Your plugin must pass unit tests and have zero memory errors in Valgrind.
-  This will ensure that Stargate is stable, reliable software.
+  This will ensure that Clint Tools is stable, reliable software.

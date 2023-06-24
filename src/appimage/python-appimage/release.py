@@ -42,7 +42,7 @@ def build(args):
             'build',
             'app',
             '--python-version', args.pyversion,
-            'stargate',
+            'clinttools',
         ],
         env=env,
     )

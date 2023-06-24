@@ -8,7 +8,7 @@ from sglib import constants
 from sglib.log import LOG
 from sglib.models.daw import *
 from sgui.daw.shared import *
-from sglib.models import stargate as sg_project
+from sglib.models import clinttools as sg_project
 from sglib.models.theme import get_asset_path
 from sglib.lib import strings as sg_strings, util
 from sglib.lib.util import *

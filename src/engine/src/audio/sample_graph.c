@@ -1,6 +1,6 @@
 #include <time.h>
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "audio/sample_graph.h"
 #include "files.h"
 #include "unicode.h"

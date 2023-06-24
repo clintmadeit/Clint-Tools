@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "stargate.h"
+#include "clinttools.h"
 #include "csv/2d.h"
 #include "files.h"
 #include "globals.h"

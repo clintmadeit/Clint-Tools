@@ -27,13 +27,13 @@ mv squashfs-root/ stargatedaw/
 ```
 
 # Adding the AppImage to the start menu
-If you wish to add the Stargate DAW AppImage to the start menu, when running
+If you wish to add the Clint Tools DAW AppImage to the start menu, when running
 the AppImage there is an action in the main menu (the "hamburger" icon in the
 upper left corner of the window after opening a project) to install (or
 uninstall) a start menu shortcut.
 
-This command will extract `stargate.png` next to the AppImage, and create
-a `~/.local/share/applications/stargate.desktop` file to add Stargate DAW
+This command will extract `clinttools.png` next to the AppImage, and create
+a `~/.local/share/applications/clinttools.desktop` file to add Clint Tools DAW
 to your start menu.
 
 Note that this must be done everytime you download a new version, otherwise
@@ -51,7 +51,7 @@ NOTE:
   hard drive and running it.  If it now works, then it is security settings
   (which probably cannot be changed easily, if at all).
 
-If you would like to install Stargate DAW for Linux to a flash drive, or you
+If you would like to install Clint Tools DAW for Linux to a flash drive, or you
 just want to store your projects and configurations next to the AppImage,
 simply place the AppImage in the desired folder, and create an empty text file
 called `_stargate_home` next to it.  Note that the Linux AppImage can be
@@ -90,7 +90,7 @@ mv squashfs-root StargateDAW
 ```
 
 However, double-clicking still will not open it.  You will need to right-click
-and choose `Run as program` to launch Stargate DAW.  Or install to the start
+and choose `Run as program` to launch Clint Tools DAW.  Or install to the start
 menu using the `Adding the AppImage to the start menu` instructions below.
 
 ## Fedora/CentOS/RHEL/Rocky/Alma/etc... AppImage issues

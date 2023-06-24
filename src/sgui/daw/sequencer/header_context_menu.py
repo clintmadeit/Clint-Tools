@@ -34,7 +34,7 @@ def show(event):
     marker_menu.addAction(time_modify_action)
     time_modify_action.setToolTip(
         'Set a time signature and tempo marker.  This is how tempo is '
-        'controlled in Stargate, and will affect how beat numbers are '
+        'controlled in Clint Tools, and will affect how beat numbers are '
         'displayed if the time signature changes.'
     )
     time_modify_action.triggered.connect(header_time_modify)

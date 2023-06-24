@@ -32,7 +32,7 @@ generates/records/processes/plays audio.  Written in GNU89 C for portable,
 stable, real-time performance.
 
 ## files/
-Various non-source-code files that are distributed with Stargate, including
+Various non-source-code files that are distributed with clinttools, including
 plugin presets, themes, desktop files.
 
 ## meta.json
@@ -42,7 +42,7 @@ Information such as major and minor release names and numbers.
 Executables to be installed to /usr/bin or elsewhere in `$PATH`.
 
 ## sglib/
-The back-end library for the Stargate UI.  All business logic, models
+The back-end library for the clinttools UI.  All business logic, models
 and related code should go in this library.  There should be no presentation
 or Qt dependencies in this library.
 
@@ -53,7 +53,7 @@ Divided into main areas:
 - models: Define data models here using `pymarshal`
 
 ## sgui/
-The UI for `stargate`.  The UI should contain as little logic as possible,
+The UI for `clinttools`.  The UI should contain as little logic as possible,
 it should make calls into `sglib.api` to interact with the rest of the stack.
 
 ## test/
@@ -62,6 +62,6 @@ Presently, `sgui` is tested manually.  `engine` has it's own unit tests in
 `engine/tests`, and is expected to have close to 100% coverage.
 
 ## vendor/
-External libraries and applications (developed by Stargate or 3rd parties) used
-by Stargate that are not readily available on all target platforms.
+External libraries and applications (developed by clinttools or 3rd parties) used
+by clinttools that are not readily available on all target platforms.
 

@@ -31,7 +31,7 @@ appimage:
 		sh -c 'cd /clinttools/src && ./appimage/appimage-helper.sh'
 	appimagetool -n \
 		../dist/squashfs-root/ \
-		../dist/clinttoolsDAW-$(MINOR)-linux-x86_64.AppImage
+		../dist/clintmadeit-$(MINOR)-linux-x86_64.AppImage
 
 appimage-debug:
 	appimage/python-appimage/release.py

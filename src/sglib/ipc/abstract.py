@@ -23,13 +23,13 @@ class AbstractIPCTransport:
 class AbstractIPC:
     """ Abstract class containing the minimum contract
         to run SG Plugins for host communication to the
-        Stargate engine
+        Clint Tools engine
     """
     def __init__(
         self,
         transport: AbstractIPCTransport,
         a_with_audio: bool=False,
-        a_configure_path: str="/stargate/daw",
+        a_configure_path: str="/clinttools/daw",
     ):
         self.transport = transport
         self.configure_path = a_configure_path

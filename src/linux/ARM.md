@@ -6,7 +6,7 @@ Including popular boards such as the Raspberry Pi 4 (rpi4).
 
 # Choosing an ARM SBC (single board computer)
 rpi4 is very popular and has become the dominant SBC platform.  However, if you
-are buying a SBC explicitly to run Stargate, it is recommended to shop around
+are buying a SBC explicitly to run Clint Tools, it is recommended to shop around
 and try to find a SBC that has a faster GPU, better GPU drivers, and if
 possible, better CPU performance is always helpful.
 
@@ -37,7 +37,7 @@ PLAT_FLAGS="" make
 
 #install
 sudo PREFIX=/usr/local make install
-# or, Stargate is fully relocatable, you can do a root-less install
+# or, Clint Tools is fully relocatable, you can do a root-less install
 # to any folder you'd like, and you can even move the folder later.
 PREFIX=$(your prefix) DESTDIR=$(where you want to install it) make install
 ```

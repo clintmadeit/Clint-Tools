@@ -126,7 +126,7 @@ class SgProject(AbstractProject):
         """ Make modifications to the project folder format as needed, to
             bring old projects up to date on format changes
         """
-        # TODO Stargate v2: Remove all existing quirks
+        # TODO Clint Tools v2: Remove all existing quirks
         self._quirk_windows_audio_pool_corruption(project_file)
 
     def _quirk_windows_audio_pool_corruption(self, project_file):

@@ -27,7 +27,7 @@ Right clicking allows various "markers" to be set:
 - Tempo marker or tempo range, set the tempo for the song at that point
 
 ## Songs List
-Stargate allows you to have more than one song in a project.  In addition to
+Clint Tools allows you to have more than one song in a project.  In addition to
 the default song, you can add additional songs for uses such as:
 - Sound design scratchpad, create small sections to be rendered as audio and
   imported into the main song
@@ -42,7 +42,7 @@ events into a single item.  This design really shines when creating your
 own drum patterns, for example.
 
 ### Takes
-When you copy and item in Stargate, it is the same item, and changes to one
+When you copy and item in Clint Tools, it is the same item, and changes to one
 copy affect all copies of items with that name.  To make changes to an item
 without affecting existing copies, right-click and create a new take.
 

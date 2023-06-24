@@ -1,5 +1,5 @@
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class DawIPC(AbstractIPC):
         self,
         transport,
         a_with_audio=False,
-        a_configure_path="/stargate/daw",
+        a_configure_path="/clinttools/daw",
     ):
         AbstractIPC.__init__(
             self,

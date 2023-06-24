@@ -10,7 +10,7 @@ from .note import PianoRollNoteItem
 from sgui.daw import shared
 from sglib.models.daw import *
 from sgui.daw.shared import *
-from sglib.models import stargate as sg_project
+from sglib.models import clinttools as sg_project
 from sglib.lib import util
 from sglib.lib import scales
 from sglib.models.theme import get_asset_path

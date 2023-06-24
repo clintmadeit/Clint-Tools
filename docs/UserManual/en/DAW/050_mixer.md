@@ -4,7 +4,7 @@ channel.  For each audio send defined on the `Routing` tab, there will be
 a slot created for a mixer plugin on the mixer.
 
 # Mixer Plugins
-In Stargate, the mixer uses plugins to provide mixer channel functionality.
+In Clint Tools, the mixer uses plugins to provide mixer channel functionality.
 Presently, the 2 mixer plugins are `Simple Fader` and `SG Channel`, although
 in the future we may offer more mixer plugins.
 

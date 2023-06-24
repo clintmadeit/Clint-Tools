@@ -34,7 +34,7 @@ else:
 
 terminating_char = "\\"
 
-PROJECT_FILE_TYPE = f'Stargate Project ({MAJOR_VERSION}.project)'
+PROJECT_FILE_TYPE = f'Clint Tools Project ({MAJOR_VERSION}.project)'
 SAMPLER_FILE_TYPE = 'Sampler1 Sample File (*.sampler1)'
 SAMPLER_FILE_TYPE_EXT = '.sampler1'
 
@@ -221,7 +221,7 @@ elif IS_MACOS:
             '..',
             '..',
             'vendor',
-            'stargate-soundstretch',
+            'clinttools-soundstretch',
         )
     else:
         PAULSTRETCH_PATH = sys.executable
@@ -235,7 +235,7 @@ elif IS_MACOS:
         )
         SOUNDSTRETCH = os.path.join(
             ENGINE_DIR,
-            "stargate-soundstretch",
+            "clinttools-soundstretch",
         )
 elif IS_LINUX:
     RUBBERBAND_PATH = which("rubberband")
@@ -244,7 +244,7 @@ elif IS_LINUX:
         '..',
         '..',
         'vendor',
-        'stargate-soundstretch',
+        'clinttools-soundstretch',
     )
     if not os.path.exists(SOUNDSTRETCH):
         SOUNDSTRETCH = os.path.join(
@@ -252,10 +252,10 @@ elif IS_LINUX:
             '..',
             '..',
             'engine',
-            'stargate-soundstretch',
+            'clinttools-soundstretch',
         )
     if not os.path.exists(SOUNDSTRETCH):
-        SOUNDSTRETCH = which("stargate-soundstretch")
+        SOUNDSTRETCH = which("clinttools-soundstretch")
     assert SOUNDSTRETCH, SOUNDSTRETCH
     # Prefer the vendored SBSMS
     SBSMS = os.path.join(
@@ -337,7 +337,7 @@ def get_win_drives():
 
 def set_bin_path():
     global BIN_PATH
-    # Try the local dev version first, if one is running stargate.py from
+    # Try the local dev version first, if one is running clinttools.py from
     # the repo
     BIN_PATH = os.path.abspath(
         os.path.join(
@@ -362,7 +362,7 @@ def get_unix_timestamp(a_dt):
         return int(a_dt.strftime("%s"))
 
 def remove_bad_chars(a_str):
-    """ Remove any characters that have special meaning to Stargate """
+    """ Remove any characters that have special meaning to Clint Tools """
     f_str = str(a_str)
     for f_char in bad_chars:
         f_str = f_str.replace(f_char, "")

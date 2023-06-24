@@ -5,5 +5,5 @@ __all__ = [
 ]
 
 from .daw import DawIPC
-from .stargate import StargateIPC
+from .clinttools import StargateIPC
 from .wave_edit import WaveEditIPC

@@ -4,7 +4,7 @@ from sglib import constants
 from sglib.log import LOG
 from sglib.math import clip_value
 from sglib.models.daw.audio_item import DawAudioItem
-from sglib.models.stargate.midi_events import (
+from sglib.models.clinttools.midi_events import (
     MIDIControl,
     MIDINote,
     MIDIPitchbend,

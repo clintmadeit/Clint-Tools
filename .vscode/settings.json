@@ -1,4 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "enabled",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "cSpell.words": [
+        "clinttools"
+    ]
 }

@@ -86,7 +86,7 @@ def setup_logging(
     log.addHandler(handler)
 
     handler = _RotatingFileHandler(
-        os.path.join(LOG_DIR, 'stargate.log'),
+        os.path.join(LOG_DIR, 'clinttools.log'),
         maxBytes=maxBytes,
         backupCount=3,
     )

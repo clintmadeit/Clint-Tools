@@ -93,7 +93,7 @@ def build_pkg():
     subprocess.check_call([
         'pkgbuild',
         '--root', BUNDLE,
-        '--identifier', 'com.github.clinttoolsdaw.clinttools',
+        '--identifier', 'com.github.clintmadeit.clinttools',
         '--scripts', '../macos/Scripts',
         '--install-location', f"/Applications/{BUNDLE}",
         'Distribution.pkg',

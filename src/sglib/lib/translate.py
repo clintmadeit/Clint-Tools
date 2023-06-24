@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This file is part of the Stargate project, Copyright Stargate Team
+This file is part of the Clint Tools project, Copyright Clint Tools Team
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ def _gettext():
         LOG.info("locale: {}".format(LOCALE))
         LOG.info("encoding: {}".format(TEXT_ENCODING))
         LANGUAGE = gettext.translation(
-            "stargate",
+            "clinttools",
             os.path.join(SHARE_DIR, "locale"),
             [LOCALE],
         )

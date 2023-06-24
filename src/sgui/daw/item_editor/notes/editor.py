@@ -7,7 +7,7 @@ from sgui import widgets
 from sgui.daw import shared
 from sglib.models.daw import *
 from sgui.daw.shared import *
-from sglib.models import stargate as sg_project
+from sglib.models import clinttools as sg_project
 from sglib.lib import strings as sg_strings
 from sglib.lib import util
 from sglib.lib import scales

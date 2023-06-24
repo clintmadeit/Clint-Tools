@@ -2,7 +2,7 @@
 
 # Currently working on Debian 11
 
-# Build the rpm and deb packages and copy to /mnt/clinttoolsdaw
+# Build the rpm and deb packages and copy to /mnt/clintmadeit
 # Meant for building the rpm and deb packages on an old version of Debian,
 # so that they will be linked against an old glibc and in theory run on
 # any Linux distro that uses those package formats
@@ -18,4 +18,4 @@ MINOR=$(jq -r .version.minor src/meta.json)
 cp \
 	src/clinttools-${MINOR}-*amd64.deb \
 	clinttools-${MINOR}-1.x86_64.rpm \
-	/mnt/clinttoolsdaw/
+	/mnt/clintmadeit/

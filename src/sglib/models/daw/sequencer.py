@@ -2,7 +2,7 @@ from . import _shared
 from .sequence_marker import loop_marker
 from .seq_item import sequencer_item
 from .tempo_marker import tempo_marker
-from sglib.models.stargate import *
+from sglib.models.clinttools import *
 from sglib.lib.util import *
 from sglib.lib.translate import _
 

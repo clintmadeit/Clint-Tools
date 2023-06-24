@@ -16,7 +16,7 @@ __all__ = [
     'USER_HOME',
 ]
 
-MAJOR_VERSION = 'stargate'
+MAJOR_VERSION = 'clinttools'
 
 MIDI_CHANNELS = [str(x) for x in range(1, 17)] + ['All']
 

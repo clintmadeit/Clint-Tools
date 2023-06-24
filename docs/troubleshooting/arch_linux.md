@@ -1,9 +1,9 @@
 # Arch Linux
-This document describes how to build Stargate DAW for Arch Linux
+This document describes how to build Clint Tools DAW for Arch Linux
 and it's derivatives like Manjaro and others.
 
-Note that Stargate DAW is available in [AUR](
-  https://aur.archlinux.org/packages/stargate/
+Note that Clint Tools DAW is available in [AUR](
+  https://aur.archlinux.org/packages/clinttools/
 )
 
 Also, if you are using an `x86_64` CPU, you may wish to use the AppImage
@@ -11,8 +11,8 @@ executable, [see this](./appimage.md)
 
 # Build Procedure
 ```
-git clone --recurse-submodules https://github.com/stargatedaw/stargate.git
-cd stargate
+git clone --recurse-submodules https://github.com/stargatedaw/clinttools.git
+cd clinttools
 # First time only
 # Depending on which variant of Arch you are using, you may need to install
 # additional packages not included here
@@ -29,7 +29,7 @@ PLAT_FLAGS='-march=native' make
 
 sudo make install
 # Or just run without installing
-./scripts/stargate
+./scripts/clinttools
 ```
 
 ## PKGBUILD

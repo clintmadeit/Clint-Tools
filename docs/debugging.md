@@ -10,7 +10,7 @@ library, the options for debugging on those platforms is limited.
 
 # Logs
 Adding logs is a good way to debug.  Log files are kept in
-`$HOME/stargate/log/`.  Note that you cannot add logs to anything in the main
+`$HOME/clinttools/log/`.  Note that you cannot add logs to anything in the main
 loop of the engine, as this will degrade performance.
 ## Logging in C
 ```c
@@ -45,18 +45,18 @@ To use these tools, one can compile a binary with the required flags, kill
 the existing engine, and run the desired binary through the desired tools.
 For example:
 ```
-cd [stargate repo folder]/src
-# Start Stargate, wait for it to load
-scripts/stargate
+cd [clinttools repo folder]/src
+# Start Clint Tools, wait for it to load
+scripts/clinttools
 # In a separate terminal or tmux window
-pkill stargate-engine
+pkill clinttools-engine
 # Note that the version of the engine with the -dbg suffix is preferred
 # for use with GDB or LLDB
-gdb ./stargate-engine-dbg
+gdb ./clinttools-engine-dbg
 # Set some breakpoints
 b some_function
 b file:123 if some_var > 1234
-# In Stargate, go to the main transport menu, select
+# In Clint Tools, go to the main transport menu, select
 #   Developer > Copy to clipboard > GDB run command
 # To get a suitable command to paste into this terminal
 run ...
@@ -66,7 +66,7 @@ run ...
 # tools such as callgrind and cachegrind can be useful.
 # There is another action to copy the Valgrind command in the Developer
 # section of the main menu
-valgrind ./engine/stargate-engine-dbg ...
+valgrind ./engine/clinttools-engine-dbg ...
 ```
 Note that the tools may slow down or block the process, which may cause
 problems with audio hardware if `--no-hardware` or `--sleep`(implies

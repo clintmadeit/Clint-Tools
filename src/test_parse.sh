@@ -2,7 +2,7 @@
 
 # Test that various files can be parsed
 
-for fname in $(find files/ -name '*.yaml' -or -name '*.sgtheme'); do
+for fname in $(find files/ -name '*.yaml' -or -name '*.cttheme'); do
 	yq . $fname 1>/dev/null
 done
 
