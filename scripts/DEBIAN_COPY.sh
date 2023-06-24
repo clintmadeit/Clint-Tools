@@ -2,7 +2,7 @@
 
 # Currently working on Debian 11
 
-# Build the rpm and deb packages and copy to /mnt/stargatedaw
+# Build the rpm and deb packages and copy to /mnt/clinttoolsdaw
 # Meant for building the rpm and deb packages on an old version of Debian,
 # so that they will be linked against an old glibc and in theory run on
 # any Linux distro that uses those package formats
@@ -17,5 +17,5 @@ git pull
 MINOR=$(jq -r .version.minor src/meta.json)
 cp \
 	src/clinttools-${MINOR}-*amd64.deb \
-	stargate-${MINOR}-1.x86_64.rpm \
+	clinttools-${MINOR}-1.x86_64.rpm \
 	/mnt/clinttoolsdaw/
