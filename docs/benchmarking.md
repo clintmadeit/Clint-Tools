@@ -1,10 +1,12 @@
 # Description
+
 This document describes how to use Clint Tools DAW as a benchmark for highly
 optimized, multithreaded audio DSP code written in C.  Specifically, this
 procedure is for Linux, it would be possible on Windows, but not trivially
 easy to do from the installed artifacts in the Windows installer.
 
 # Overview
+
 The Clint Tools UI is a PyQt5/6 application that controls the engine subprocess
 that is written in C, by invoking the engine CLI and communicating over UDP
 sockets on localhost.
@@ -16,6 +18,7 @@ device, and not to listen for communications over sockets.  We can use this
 mechanism to benchmark the code.
 
 ## Considerations
+
 The track routing in the project affects multicore scaling, 2 different
 projects will not have identical scaling.  For example, if every track routes
 directly to the `Main` track, the project will scale very well to many cores,
@@ -28,21 +31,27 @@ the normal, average use case is somewhere between, but much closer to the ideal
 use case.
 
 # Benchmark setup
+
 ## Download or build clinttools DAW
+
 See [the build instructions](./building.md) or the
 [releases page](https://github.com/clintmadeit/clinttools/releases).
 
 ## Run the benchmark
+
 ### Acquiring projects to benchmark
+
 [Download the CPU-heavy stress-testing project here](./benchmark-project.zip)
 
 Or clone the demo projects for real world benchmarking
+
 ```
 git clone https://github.com/clintmadeit/ClintToolsv1_demo_projects.git
 # Projects are in ClintToolsv1_demo_projects/src/*/
 ```
 
 ### Generate the engine command from the UI
+
 This is needed to generate the start and end parameters for the command, to
 know which beat number the render should start and stop at.  Using arbitrary
 numbers is also an option, but it is best to render the entire song and not
@@ -61,8 +70,9 @@ include empty space at either end, as it may skew the results.
 * Paste the command arguments you copied from the render dialog
 
 You should have with something like this in your terminal window:
+
 ```
-./clinttools-engine daw '/home/me/ClintTools/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
+./clinttools-engine daw '/home/me/clinttools/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
 ```
 
 ### Parameterizing a benchmarking shell command
@@ -112,6 +122,7 @@ Using this to parameterize your benchmark with scaling values, you can now
 grep the output for these lines:
 
 Affirmation of how many threads were actually spawned.
+
 ```
 Spawning 16 worker threads
 ```
@@ -120,12 +131,14 @@ Total time to render the file.  This does not include time to load the
 project directory, which is not threaded, nor does it make sense to thread.
 If you measured total run time of the process, it would include the load
 time and skew the results.
+
 ```
 Completed v_daw_offline_render in 28.158311 seconds
 ```
 
 Length of the `.wav` file that was rendered.  If you open it in a music player,
 this is how long it would play.
+
 ```
 Song length: 155.643356 seconds
 ```
@@ -135,11 +148,13 @@ can keep up with real time, no faster or slower.  For example, a 120 second
 song rendered in 120 seconds.  3: 1 means that Clint Tools DAW can output 3
 seconds of the song in 1 second (on average, for the entire song).  Less than
 1:1 means the system is too slow to play the project back in real time.
+
 ```
 Ratio, render time to real time (higher is better):  5.527439 : 1
 ```
 
 # Examples
+
 This is a benchmark of my current system, a Ryzen 5950x with 16 cores, using
 a development build shortly after the Clint Tools DAW 21.10.8 release.
 
@@ -154,6 +169,7 @@ However, you can offline render it on any hardware, even a Raspberry Pi 4 or an
 ancient laptop.
 
 16 threads, 44100 sample rate, 512 buffer size:
+
 ```
 Completed v_daw_offline_render in 28.158311 seconds
 Song length: 155.643356 seconds
@@ -161,6 +177,7 @@ Ratio, render time to real time (higher is better):  5.527439 : 1
 ```
 
 8 threads, 44100 sample rate, 512 buffer size:
+
 ```
 Completed v_daw_offline_render in 47.669643 seconds
 Song length: 155.643356 seconds
@@ -168,6 +185,7 @@ Ratio, render time to real time (higher is better):  3.265041 : 1
 ```
 
 4 threads, 44100 sample rate, 512 buffer size:
+
 ```
 Completed v_daw_offline_render in 93.022316 seconds
 Song length: 157.512562 seconds
@@ -175,6 +193,7 @@ Ratio, render time to real time (higher is better):  1.693277 : 1
 ```
 
 2 threads, 44100 sample rate, 512 buffer size:
+
 ```
 Completed v_daw_offline_render in 182.148489 seconds
 Song length: 157.512562 seconds
@@ -187,4 +206,3 @@ DAW on 2 CPU cores.  However, given that this project is completely,
 unrealistically CPU heavy (many times more so than a normal song), this is a
 testament to how CPU efficient the code is that such a heavy project can almost
 run on 2 cores.
-

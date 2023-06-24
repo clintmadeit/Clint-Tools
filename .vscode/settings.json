@@ -2,6 +2,19 @@
     "C_Cpp.errorSquiggles": "enabled",
     "python.analysis.typeCheckingMode": "basic",
     "cSpell.words": [
-        "clinttools"
+        "cachegrind",
+        "callgrind",
+        "clinttools",
+        "Festivus",
+        "LLDB",
+        "memcheck",
+        "multicore",
+        "myproject",
+        "OUTFILE",
+        "pkill",
+        "Ryzen",
+        "sglib",
+        "Toolsv",
+        "Valgrind"
     ]
 }
