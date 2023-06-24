@@ -1,18 +1,18 @@
 ![Banner](assets/banner.png?raw=true "Banner")
-Clint-Tools is an all-in-one DAW and plugin suite, designed to be a comprehensive
+clinttools is an all-in-one DAW and plugin suite, designed to be a comprehensive
 solution for music production, with a focus on providing unique and innovative
-features, for all genres of music. It is African-based equipped with a variety of African-origin sounds for realism. To understand what Clint-Tools really is,
+features, for all genres of music. It is African-based equipped with a variety of African-origin sounds for realism. To understand what clinttools really is,
 and why, read the
 [project design principles](docs/project_design_principles.md).
 
 # Useful Links
-- [Download Clint-Tools demo projects](
+- [Download clinttools demo projects](
     https://github.com/clintmadeit/ClintToolsv1_demo_projects)
 - [Download instruments for Sampler1](https://github.com/sfzinstruments)
 - [Download or contribute to our public domain sample pack](
     https://github.com/clintmadeit/ClintTools_sample_pack)
 - Source code is mirrored on [Gitlab](https://gitlab.com/clinttools) and
-  [Code-berg](https://codeberg.org/Clint-Tools), however, releases, issues and
+  [Code-berg](https://codeberg.org/clinttools), however, releases, issues and
   pull requests are only on [GitHub](https://github.com/clinttools)
 
 # DAW Features
@@ -49,7 +49,7 @@ and why, read the
 
 # Licensing
 
-Clint-Tools is a professional music production software: you cannot redistribute it and/or modify
+clinttools is a professional music production software: you cannot redistribute it and/or modify
 it whatsoever.
 You can, however, suggest improvements to the authorized personnel for implementation.
 

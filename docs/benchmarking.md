@@ -28,9 +28,9 @@ the normal, average use case is somewhere between, but much closer to the ideal
 use case.
 
 # Benchmark setup
-## Download or build Clint-Tools DAW
+## Download or build clinttools DAW
 See [the build instructions](./building.md) or the
-[releases page](https://github.com/clintmadeit/Clint-Tools/releases).
+[releases page](https://github.com/clintmadeit/clinttools/releases).
 
 ## Run the benchmark
 ### Acquiring projects to benchmark
@@ -38,8 +38,8 @@ See [the build instructions](./building.md) or the
 
 Or clone the demo projects for real world benchmarking
 ```
-git clone https://github.com/clintmadeit/Clint_Toolsv1_demo_projects.git
-# Projects are in Clint_Toolsv1_demo_projects/src/*/
+git clone https://github.com/clintmadeit/ClintToolsv1_demo_projects.git
+# Projects are in ClintToolsv1_demo_projects/src/*/
 ```
 
 ### Generate the engine command from the UI
@@ -54,15 +54,15 @@ include empty space at either end, as it may skew the results.
   the region start/end
 * Go to `Menu (top left of the screen)->File->Render`
 * Click the `Copy cmd args` button, and close the dialog
-* Close Clint_Tools DAW
+* Close ClintTools DAW
 * Open a terminal
-* Type in the `Clint_Tools-engine` binary you want to use, ie: ./clinttools-engine,
-  /usr/bin/Clint_Tools-engine, etc...
+* Type in the `clinttools-engine` binary you want to use, ie: ./clinttools-engine,
+  /usr/bin/clinttools-engine, etc...
 * Paste the command arguments you copied from the render dialog
 
 You should have with something like this in your terminal window:
 ```
-./Clint_Tools-engine daw '/home/me/Clint_Tools/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
+./clinttools-engine daw '/home/me/ClintTools/projects/myproject' test.wav 8 340 44100 512 3 0 0 0
 ```
 
 ### Parameterizing a benchmarking shell command
@@ -86,7 +86,7 @@ BUF_SIZE=512
 THREADS=8
 # The project folder to render.  Specifically, this is the folder that contains
 # the `clinttools.project` file.
-PROJECT=~/Clint-Tools/projects/myproject
+PROJECT=~/clinttools/projects/myproject
 # The file to output.  If you want to keep all of the artifacts from this run,
 # change the filename between runs
 OUTFILE=test.wav
@@ -99,7 +99,7 @@ START=8
 # This should always be a (much) larger number than ${START}
 END=340
 
-./Clint_Tools-engine daw ${PROJECT?} ${OUTFILE?} ${START?} ${END?} ${SR?} ${BUF_SIZE?} ${THREADS?} 0 0 0
+./clinttools-engine daw ${PROJECT?} ${OUTFILE?} ${START?} ${END?} ${SR?} ${BUF_SIZE?} ${THREADS?} 0 0 0
 ```
 
 The `OUTFILE` parameter will exist as a file after the render.  Note that the

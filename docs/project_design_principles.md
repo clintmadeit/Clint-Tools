@@ -122,7 +122,7 @@ have some effect on the experience, but the difference should be minimal).
   the same file location.
 - A full suite of built-in plugins.  Any 3rd party plugin standard is going
   to be difficult to support across operating systems and CPU architectures,
-  if the developers even support all the platforms that Clint-Tools supports.
+  if the developers even support all the platforms that clinttools supports.
   Even if well-supported on all platforms, it is cumbersome to have all users
   install the exact same plugins.
 

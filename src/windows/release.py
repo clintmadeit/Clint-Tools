@@ -36,7 +36,7 @@ SetCompressor /SOLID lzma
 
 Name "Clint Tools DAW {MINOR_VERSION}"
 OutFile "dist\clintmadeit-{MINOR_VERSION}-win64-installer.exe"
-InstallDir "$PROGRAMFILES64\clintmadeit@github\Clint-Tools"
+InstallDir "$PROGRAMFILES64\clintmadeit@github\clinttools"
 
 ;--------------------------------
 ;Interface Settings
