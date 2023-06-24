@@ -3,6 +3,7 @@ import os
 
 from sglib import constants
 from sglib.lib import util
+from sglib.lib.engine import close_engine, reopen_engine
 from sglib.log import LOG
 from sgui.sgqt import *
 
@@ -92,6 +93,7 @@ def add_entropy(a_timedelta):
     else:
         return False
 
+# Imported close_engine and reopen_engine form sgui
 def restart_engine():
     close_engine()
     reopen_engine()
